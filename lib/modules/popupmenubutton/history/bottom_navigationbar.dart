@@ -1,7 +1,7 @@
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
-import 'package:direct_whatsapp/widgets/add-number_list.dart';
-import 'package:direct_whatsapp/widgets/username.dart';
+import 'package:direct_whatsapp/modules/popupmenubutton/history/contacts/contacts_number.dart';
+import 'package:direct_whatsapp/modules/popupmenubutton/history/username/username_telegram.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';

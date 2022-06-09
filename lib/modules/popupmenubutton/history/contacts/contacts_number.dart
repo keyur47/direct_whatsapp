@@ -47,80 +47,85 @@ class _AddListState extends State<AddList> {
           backgroundColor: AppColors.darkBlue,
           title: Text(StringsUtils.contactsHistory),
         ),
-        body: SingleChildScrollView(
-            child: controller.numberList.isEmpty
-                ? Text("No data")
-                : Column(
-                    children: [
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      for (var i = 0;i < controller.numberList.length;i++) ...[
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: 5.w, right: 5.w, top: 1.h),
-                          child: Container(
-                              height: 7.h,
+        body: Stack(
+          children: [
+            controller.numberList.isEmpty
+                ? Center(child: Image.asset("assets/image/no_data.png",scale: 5,))
+                : SingleChildScrollView(
+                  child: Column(
+                      children: [
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        for (var i = 0;i < controller.numberList.length;i++) ...[
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 5.w, right: 5.w, top: 1.h),
+                            child: Container(
+                                height: 7.h,
 
-                              decoration: BoxDecoration(
-                              color: AppColor.backgroundColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(width: 1)),
-                              child: Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      controller.myController.text = controller.numberList[i];
-                                      controller.data.value = controller.countryList[i];
-                                      Get.back();
-                                    },
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 2.w, top: 0.h),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          CircleAvatar(
-                                            backgroundColor: AppColors.darkBlue,
-                                            child: Text(
-                                              "+${controller.countryList[i]}",
-                                              style: TextStyle(
-                                                  color: AppColors.white,
-                                                  fontSize: 12),
+                                decoration: BoxDecoration(
+                                color: AppColor.backgroundColor,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(width: 1)),
+                                child: Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        controller.myController.text = controller.numberList[i];
+                                        controller.data.value = controller.countryList[i];
+                                        Get.back();
+                                      },
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.only(left: 2.w, top: 0.h),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor: AppColors.darkBlue,
+                                              child: Text(
+                                                "+${controller.countryList[i]}",
+                                                style: TextStyle(
+                                                    color: AppColors.white,
+                                                    fontSize: 12),
+                                              ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 1.2.h, left: 2.w),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.2.h, left: 2.w),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
 
-                                            Text("${controller.numberList[i]}",
-                                                    style: TextStyle(
-                                                        color: AppColors.black,
-                                                        fontSize: 16)),
-                                                Text(
-                                                    "${controller.nameCountryList[i].toString()}",
-                                                    style: TextStyle(
-                                                        color: AppColors.red,
-                                                        fontSize: 14)),
-                                              ],
+                                              Text("${controller.numberList[i]}",
+                                                      style: TextStyle(
+                                                          color: AppColors.black,
+                                                          fontSize: 16)),
+                                                  Text(
+                                                      "${controller.nameCountryList[i].toString()}",
+                                                      style: TextStyle(
+                                                          color: AppColors.red,
+                                                          fontSize: 14)),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        SizedBox(height: 0.5.h)
+                                  ],
+                                )),
+                          ),
+                          SizedBox(height: 0.5.h)
+                        ],
                       ],
-                    ],
-                  )),
+                    ),
+                ),
+          ],
+        ),
       ),
     );
   }

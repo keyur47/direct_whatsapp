@@ -40,59 +40,64 @@ class _UserNameState extends State<UserName> {
           backgroundColor: AppColors.darkBlue,
           title: Text(StringsUtils.userNameHistory),
         ),
-        body: SingleChildScrollView(
-            child: controller.nameTelegramList.isEmpty
-                ? Text("No data")
-                : Column(
-                    children: [
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      for (var i = 0;
-                          i < controller.nameTelegramList.length;
-                          i++) ...[
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: 5.w, right: 5.w, top: 1.h),
-                          child: Container(
-                            height: 4.h,
-                            decoration: BoxDecoration(
-                                color: AppColor.backgroundColor,
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(width: 1)),
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: 2.w,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  controller.textController.text =
-                                      controller.nameTelegramList[i];
-                                  Get.back();
-                                },
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.arrow_forward),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 2.w),
-                                      child: Text(
-                                        "${controller.nameTelegramList[i]}",
-                                        style: TextStyle(
-                                            color: AppColors.black,
-                                            fontSize: 16),
+        body: Stack(
+          children: [
+            controller.nameTelegramList.isEmpty
+                ? Center(child: Image.asset("assets/image/no_data.png",scale: 5,))
+                : SingleChildScrollView(
+                  child: Column(
+                      children: [
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        for (var i = 0;
+                            i < controller.nameTelegramList.length;
+                            i++) ...[
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 5.w, right: 5.w, top: 1.h),
+                            child: Container(
+                              height: 4.h,
+                              decoration: BoxDecoration(
+                                  color: AppColor.backgroundColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(width: 1)),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: 2.w,
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    controller.textController.text =
+                                        controller.nameTelegramList[i];
+                                    Get.back();
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.arrow_forward),
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 2.w),
+                                        child: Text(
+                                          "${controller.nameTelegramList[i]}",
+                                          style: TextStyle(
+                                              color: AppColors.black,
+                                              fontSize: 16),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 0.5.h)
+                          SizedBox(height: 0.5.h)
+                        ],
                       ],
-                    ],
-                  )),
+                    ),
+                ),
+          ],
+        ),
       ),
     );
   }

@@ -25,31 +25,31 @@ class Controller extends GetxController {
   FocusNode confirmFocusNode = FocusNode();
 
 
-  void onInit() {
-    emailFocusNode.addListener(() {
-      if (!emailFocusNode.hasFocus) {
-        AppSnackBar
-            .showErrorSnackBar(
-          message:
-          "Please Enter Email & Feedback",
-          title: 'Error',
-          snackPosition:
-          SnackPosition.TOP,
-        );
-      }else if (!(RegExp(StringsUtils.emailRegExp)
-          .hasMatch(emailFeedBackController.text.trim()))) {
-        AppSnackBar
-            .showErrorSnackBar(
-          message:
-          "Please Enter a & b",
-          title: 'Error',
-          snackPosition:
-          SnackPosition.TOP,
-        );
-      }
-    });
-    super.onInit();
-  }
+  // void onInit() {
+  //   emailFocusNode.addListener(() {
+  //     if (!emailFocusNode.hasFocus) {
+  //       AppSnackBar
+  //           .showErrorSnackBar(
+  //         message:
+  //         "Please Enter Email & Feedback",
+  //         title: 'Error',
+  //         snackPosition:
+  //         SnackPosition.TOP,
+  //       );
+  //     }else if (!(RegExp(StringsUtils.emailRegExp)
+  //         .hasMatch(emailFeedBackController.text.trim()))) {
+  //       AppSnackBar
+  //           .showErrorSnackBar(
+  //         message:
+  //         "Please Enter a & b",
+  //         title: 'Error',
+  //         snackPosition:
+  //         SnackPosition.TOP,
+  //       );
+  //     }
+  //   });
+  //   super.onInit();
+  // }
 
 
 

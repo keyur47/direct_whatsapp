@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:direct_whatsapp/modules/homepage.dart';
+import 'package:direct_whatsapp/modules/homepage/homepage.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:flutter/material.dart';

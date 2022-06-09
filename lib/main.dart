@@ -1,5 +1,5 @@
-import 'package:direct_whatsapp/modules/homepage.dart';
-import 'package:direct_whatsapp/widgets/splashScreen.dart';
+import 'package:direct_whatsapp/modules/homepage/homepage.dart';
+import 'package:direct_whatsapp/modules/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';

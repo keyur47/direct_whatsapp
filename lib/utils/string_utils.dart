@@ -20,6 +20,9 @@ class StringsUtils {
   static const String rateApp = 'Rate App';
   static const String feedback = 'Feedback';
   static const String termsAndPrivacy = "Terms and Privacy";
+  static const String feedBackMessages = "Top a star to rate it on the \n App Store.";
+  static const String feedBackTitle = "Enjoying Direct WhatsApp";
+  static const String feedBackButtonNotNow = "Not Now";
   static const String emailRegExp =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
 }
