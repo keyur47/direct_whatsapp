@@ -44,15 +44,15 @@ class OpenTelegram extends StatelessWidget {
             }else{
               AppSnackBar.showErrorSnackBar(
                 Icon: Icon(Icons.telegram,color: Colors.blue),
-                message: "Please enter Country Code",
+                message: StringsUtils.pleaseCountryCode,
                 title: StringsUtils.userNameTelegram,
-                snackPosition: SnackPosition.TOP,
+                snackPosition: SnackPosition.BOTTOM,
               );
             }
           } else {
             AppSnackBar.showErrorSnackBar(
               Icon: Icon(Icons.telegram,color: Colors.blue),
-              message: "Please enter Phone Number",
+              message: StringsUtils.pleasePhoneNumber,
               title: StringsUtils.userNameTelegram,
               snackPosition: SnackPosition.BOTTOM,
             );

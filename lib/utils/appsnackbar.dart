@@ -9,7 +9,7 @@ class AppSnackBar {
         snackPosition: snackPosition,
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
         borderRadius: 8,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black12,
         animationDuration: const Duration(milliseconds: 500),
         barBlur: 10,
         colorText: Colors.black,

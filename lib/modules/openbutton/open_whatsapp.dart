@@ -52,15 +52,15 @@ class OpenWhatsApp extends StatelessWidget {
                         2, 1), // changes position of shadow
                   ),
                 ]),
-                message: "Please enter Country Code",
+                message: StringsUtils.pleaseCountryCode,
                 title: StringsUtils.openWhatsApp,
-                snackPosition: SnackPosition.TOP,
+                snackPosition: SnackPosition.BOTTOM,
               );
             }
           } else {
             AppSnackBar.showErrorSnackBar(
               Icon: Icon(Icons.whatsapp,color: Colors.green),
-              message: "Please enter Phone Number",
+              message: StringsUtils.pleasePhoneNumber,
               title: StringsUtils.openWhatsApp,
               snackPosition: SnackPosition.BOTTOM,
             );

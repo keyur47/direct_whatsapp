@@ -65,6 +65,8 @@ Widget textField({required TextEditingController? controller,required int maxLin
     required String? hintText,required Color cursorColor,
     required TextInputType textInputType,
   required BoxBorder? boxBorder,
+  ValueChanged<String>? valueChanged,
+  FormFieldValidator<String>? validator,
     required VoidCallback onTap}) {
   return Container(
     decoration: BoxDecoration(
@@ -81,9 +83,11 @@ Widget textField({required TextEditingController? controller,required int maxLin
           hintStyle: textStyle,
         ),
         controller: controller,
+        onChanged: valueChanged,
         // showCursor: showCursor,
         style: style,
         keyboardType: textInputType,
+        validator: validator,
         // focusNode: focusNode,
         cursorColor: cursorColor,
       ),

@@ -51,15 +51,15 @@ class ShareLocationWhatsApp extends StatelessWidget {
             } else {
               AppSnackBar.showErrorSnackBar(
                 Icon: Icon(Icons.location_on_outlined,color: Colors.green),
-                message: "Please enter Country Code",
+                message:  StringsUtils.pleaseCountryCode,
                 title: StringsUtils.shareLocation,
-                snackPosition: SnackPosition.TOP,
+                snackPosition: SnackPosition.BOTTOM,
               );
             }
           } else {
             AppSnackBar.showErrorSnackBar(
               Icon: Icon(Icons.location_on_outlined,color: Colors.green),
-              message: "Please enter Phone Number",
+              message:  StringsUtils.pleasePhoneNumber,
               title: StringsUtils.shareLocation,
               snackPosition: SnackPosition.BOTTOM,
             );

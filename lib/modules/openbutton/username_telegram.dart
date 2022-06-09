@@ -30,7 +30,7 @@ class UserNameTelegram extends StatelessWidget {
           } else {
             AppSnackBar.showErrorSnackBar(
               Icon: Icon(Icons.people_alt_rounded,color: Colors.blue),
-              message: "Please enter Username",
+              message: StringsUtils.pleaseUsername,
               title: StringsUtils.userNameTelegram,
               snackPosition: SnackPosition.BOTTOM,
             );

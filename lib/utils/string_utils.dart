@@ -23,6 +23,11 @@ class StringsUtils {
   static const String feedBackMessages = "Top a star to rate it on the \n App Store.";
   static const String feedBackTitle = "Enjoying Direct WhatsApp";
   static const String feedBackButtonNotNow = "Not Now";
+  static const String pleasePhoneNumber = "Please Enter Phone Number";
+  static const String pleaseCountryCode = "Please Enter Country Code";
+  static const String pleaseUsername = "Please Enter Username";
+  static const String pleaseEmail = "Please Enter Email & Feedback";
+  static const String pleaseEmails = "Please Enter Email";
   static const String emailRegExp =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
 }

@@ -1,5 +1,5 @@
-import 'package:direct_whatsapp/utils/appsnackbar.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,49 +23,65 @@ class Controller extends GetxController {
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
   FocusNode confirmFocusNode = FocusNode();
+  RxString errorMessage = "".obs;
 
 
-  // void onInit() {
-  //   emailFocusNode.addListener(() {
-  //     if (!emailFocusNode.hasFocus) {
-  //       AppSnackBar
-  //           .showErrorSnackBar(
-  //         message:
-  //         "Please Enter Email & Feedback",
-  //         title: 'Error',
-  //         snackPosition:
-  //         SnackPosition.TOP,
-  //       );
-  //     }else if (!(RegExp(StringsUtils.emailRegExp)
-  //         .hasMatch(emailFeedBackController.text.trim()))) {
-  //       AppSnackBar
-  //           .showErrorSnackBar(
-  //         message:
-  //         "Please Enter a & b",
-  //         title: 'Error',
-  //         snackPosition:
-  //         SnackPosition.TOP,
-  //       );
-  //     }
-  //   });
-  //   super.onInit();
-  // }
+  void validateEmail(String val) {
+    if(val.isEmpty){
+        errorMessage.value = StringsUtils.pleaseEmails;
+    }else if(!EmailValidator.validate(val, true)){
+        errorMessage.value = "Invalid Email Address";
+    }else{
+        errorMessage.value = "";
+    }
+  }
 
 
 
-  // @override
-  //   void onInit() {
-  //     focusNode.addListener(() {
-  //     //controller.isOpenKeyboard.value = controller.focusNode.hasFocus;// setState(() {});
-  //     focusNode.hasFocus?isOpenKeyboard.value = true:isOpenKeyboard.value = false;
-  //     });
-  //    super.onInit();
-  //  }
-
-  // @override
-  // void dispose() {
-  //   focusNode.dispose();
-  //   super.dispose();
-  // }
 
 }
+
+
+
+// void onInit() {
+//   emailFocusNode.addListener(() {
+//     if (!emailFocusNode.hasFocus) {
+//       AppSnackBar
+//           .showErrorSnackBar(
+//         message:
+//         "Please Enter Email & Feedback",
+//         title: 'Error',
+//         snackPosition:
+//         SnackPosition.TOP,
+//       );
+//     }else if (!(RegExp(StringsUtils.emailRegExp)
+//         .hasMatch(emailFeedBackController.text.trim()))) {
+//       AppSnackBar
+//           .showErrorSnackBar(
+//         message:
+//         "Please Enter a & b",
+//         title: 'Error',
+//         snackPosition:
+//         SnackPosition.TOP,
+//       );
+//     }
+//   });
+//   super.onInit();
+// }
+
+
+
+// @override
+//   void onInit() {
+//     focusNode.addListener(() {
+//     //controller.isOpenKeyboard.value = controller.focusNode.hasFocus;// setState(() {});
+//     focusNode.hasFocus?isOpenKeyboard.value = true:isOpenKeyboard.value = false;
+//     });
+//    super.onInit();
+//  }
+
+// @override
+// void dispose() {
+//   focusNode.dispose();
+//   super.dispose();
+// }

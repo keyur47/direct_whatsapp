@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:direct_whatsapp/helper/exception/app_exception.dart';
 import 'package:direct_whatsapp/modules/homepage/homepage.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
@@ -37,7 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    try{
     startTimeOut();
+    }catch(e){
+      AppException.showException(e);
+    }
   }
 
   @override
@@ -98,6 +103,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
   void startTimeOut() {
     _timer = Timer.periodic(
       const Duration(seconds: 2),

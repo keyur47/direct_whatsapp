@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(top: 1.h, right: 5.w),
                     child: Column(
                       children: [
-                        InkWell(
+                        GestureDetector(
                           child: phoneNumberTextField(
                               controller: controller.myController,
                               showCursor: false,
