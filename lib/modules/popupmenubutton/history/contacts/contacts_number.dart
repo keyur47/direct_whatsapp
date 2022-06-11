@@ -72,7 +72,7 @@ class _AddListState extends State<AddList> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        controller.myController.text = controller.numberList[i];
+                                        controller.numberController.text = controller.numberList[i];
                                         controller.data.value = controller.countryList[i];
                                         Get.back();
                                       },

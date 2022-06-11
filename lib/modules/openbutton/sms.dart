@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:io';
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/modules/controller/controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
@@ -5,16 +7,20 @@ import 'package:direct_whatsapp/utils/appsnackbar.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/widgets/button_box.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ShareLocationWhatsApp extends StatelessWidget {
-  ShareLocationWhatsApp({Key? key}) : super(key: key);
+class Sms extends StatefulWidget {
+  Sms({Key? key}) : super(key: key);
 
+  @override
+  State<Sms> createState() => _SmsState();
+}
+
+class _SmsState extends State<Sms> {
   Controller controller = Get.find();
 
+  @override
   @override
   Widget build(BuildContext context) {
     return button(
@@ -30,45 +36,44 @@ class ShareLocationWhatsApp extends StatelessWidget {
               controller.nameCountryList.addAll([controller.countryName.value]);
               await SharedPrefs.setCountryNameList(controller.nameCountryList);
               print("CountryObjectName${controller.nameCountryList}");
-              await Geolocator.requestPermission();
-              if (await Permission.location.isGranted) {
-                Position? position;
-                try {
-                  position = await Geolocator.getCurrentPosition(
-                    desiredAccuracy: LocationAccuracy.bestForNavigation,
-                    timeLimit: const Duration(seconds: 5),
-                  );
-                  var urls =
-                      "https://www.google.com/maps/?q=${position.latitude},${position.longitude}"
-                          .toString();
-                  final url =
-                      "https://wa.me/+${controller.data.value}${controller.numberController.text}?text=See my real-time location on Maps:$urls";
-                  await launch(url);
-                  print("Location$url");
-                  print("Location121$urls");
-                } catch (e) {}
+              if (Platform.isAndroid) {
+                final uri =
+                    'sms:+${controller.data.value}${controller.numberController.text}?body=${controller.textController.text}%20';
+                log("Sms :- $uri");
+                await launch(uri);
+              } else if (Platform.isIOS) {
+                final uri =
+                    'sms:${controller.numberController.text}&body=${controller.textController.text}%20';
+                await launch(uri);
               }
             } else {
               AppSnackBar.showErrorSnackBar(
-                Icon: Icon(Icons.location_on_outlined,color: Colors.green),
-                message:  StringsUtils.pleaseCountryCode,
-                title: StringsUtils.shareLocation,
+                Icon: Icon(Icons.message, color: AppColors.darkBlue, shadows: [
+                  BoxShadow(
+                    color: AppColor.appColors.withOpacity(0.8),
+                    spreadRadius: 10,
+                    blurRadius: 7,
+                    offset: const Offset(2, 1), // changes position of shadow
+                  ),
+                ],),
+                message: StringsUtils.pleaseCountryCode,
+                title: StringsUtils.openMessages,
                 snackPosition: SnackPosition.BOTTOM,
               );
             }
           } else {
             AppSnackBar.showErrorSnackBar(
-              Icon: Icon(Icons.location_on_outlined,color: Colors.green),
-              message:  StringsUtils.pleasePhoneNumber,
-              title: StringsUtils.shareLocation,
+              Icon: Icon(Icons.message, color: AppColors.darkBlue),
+              message: StringsUtils.pleasePhoneNumber,
+              title: StringsUtils.openMessages,
               snackPosition: SnackPosition.BOTTOM,
             );
           }
         },
-        text: StringsUtils.shareLocation,
-        iconData: Icons.location_on_outlined,
+        text: StringsUtils.Messages,
+        iconData: Icons.message,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: AppColors.green);
+        iconColor: AppColors.darkBlue);
   }
 }

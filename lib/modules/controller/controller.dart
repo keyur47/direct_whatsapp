@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class Controller extends GetxController {
 
-  TextEditingController myController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
   TextEditingController textController = TextEditingController();
   TextEditingController emailFeedBackController = TextEditingController();
   TextEditingController FeedBackController = TextEditingController();

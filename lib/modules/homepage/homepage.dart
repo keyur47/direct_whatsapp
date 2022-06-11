@@ -1,9 +1,11 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/main.dart';
 import 'package:direct_whatsapp/modules/homepage/numberkeyboard/num_pad.dart';
+import 'package:direct_whatsapp/modules/openbutton/instagram.dart';
 import 'package:direct_whatsapp/modules/openbutton/open_telegram.dart';
 import 'package:direct_whatsapp/modules/openbutton/open_whatsapp.dart';
 import 'package:direct_whatsapp/modules/openbutton/share_location.dart';
+import 'package:direct_whatsapp/modules/openbutton/sms.dart';
 import 'package:direct_whatsapp/modules/openbutton/username_telegram.dart';
 import 'package:direct_whatsapp/modules/popupmenubutton/feedback/feedback.dart';
 import 'package:direct_whatsapp/modules/popupmenubutton/rate/rate.dart';
@@ -28,6 +30,43 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Controller controller = Get.find();
 
+  bool _showClearButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    controller.textController.addListener(() {
+      setState(() {
+        _showClearButton =   controller.textController.text.length > 0;
+      });
+    });
+  }
+
+  Widget _getClearButton() {
+    if (!_showClearButton) {
+      return Text("");
+    }
+    return Padding(
+      padding: EdgeInsets.only(bottom: 0),
+      child: IconButton(
+        onPressed: () =>   controller.textController.clear(),
+        icon: Icon(Icons.clear),
+      ),
+    );
+  }
+
+  TextFormField _getTextField() {
+    return TextFormField(
+      maxLength: 1000,
+      maxLines: 1,
+      controller:  controller.textController,
+      decoration: InputDecoration(
+        hintText: "Enter a beautiful text",
+        suffixIcon: _getClearButton(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,211 +74,219 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColor.backgroundColor,
         resizeToAvoidBottomInset: false,
         body: Obx(
-          () => Container(
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: 2.w,
-                left: 5.w,
-                // right: 5.w,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.whatsapp,
-                              size: 16.w,
-                              color: AppColor.appColors,
-                              shadows: [
-                                BoxShadow(
-                                  color: AppColor.appColors.withOpacity(0.8),
-                                  spreadRadius: 10,
-                                  blurRadius: 7,
-                                  offset: const Offset(
-                                      2, 1), // changes position of shadow
-                                ),
-                              ]),
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          Text(
-                            StringsUtils.whatsDirects,
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: AppColors.darkBlue,
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                      PopupMenuButton(
-                        onSelected: (int value) {
-                          if (value == 1) {
-                            Get.to(TabBarApp());
-                          } else if (value == 2) {
-                            Share();
-                          } else if (value == 3) {
-                            RateBox(context);
-                          } else if (value == 4) {
-                            FeedbackBox(context);
-                          } else {
-                          }
-                          print("Value:- $value");
-                        },
-                        itemBuilder: (context) => [
-                          PopupMenuItem(
-                            child: Text(StringsUtils.history),
-                            value: 1,
-                          ),
-                          PopupMenuItem(
-                            child: Text(StringsUtils.shareApp),
-                            value: 2,
-                          ),
-                          PopupMenuItem(
-                            child: Text(StringsUtils.rateApp),
-                            value: 3,
-                          ),
-                          PopupMenuItem(
-                            child: Text(StringsUtils.feedback),
-                            value: 4,
-                          ),
-                          PopupMenuItem(
-                            child: Text(StringsUtils.termsAndPrivacy),
-                            value: 5,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 1.h, right: 5.w),
+                () => Container(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: 2.w,
+                      left: 5.w,
+                      // right: 5.w,
+                    ),
                     child: Column(
                       children: [
-                        GestureDetector(
-                          child: phoneNumberTextField(
-                              controller: controller.myController,
-                              showCursor: false,
-                              onTapV: () async {
-                                FocusScope.of(context).unfocus();
-                                await Future.delayed(
-                                    const Duration(milliseconds: 200));
-                                showNumericContainer.value = true;
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.whatsapp,
+                                    size: 16.w,
+                                    color: AppColor.appColors,
+                                    shadows: [
+                                      BoxShadow(
+                                        color: AppColor.appColors.withOpacity(0.8),
+                                        spreadRadius: 10,
+                                        blurRadius: 7,
+                                        offset: const Offset(
+                                            2, 1), // changes position of shadow
+                                      ),
+                                    ]),
+                                SizedBox(
+                                  width: 1.w,
+                                ),
+                                Text(
+                                  StringsUtils.whatsDirects,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: AppColors.darkBlue,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                            PopupMenuButton(
+                              onSelected: (int value) {
+                                if (value == 1) {
+                                  Get.offAllNamed(TabBarApp.routeName);
+                                } else if (value == 2) {
+                                  Share();
+                                } else if (value == 3) {
+                                  RateBox(context);
+                                } else if (value == 4) {
+                                  FeedbackBox(context);
+                                } else {
+                                }
+                                print("Value:- $value");
                               },
-                              // focusNode: controller.focusNodes,
-                              hintText: StringsUtils.phoneNumber,
-                              textInputType: TextInputType.none,
-                              valueChanged: (country) {
-                                setState(() {
-                                  controller.data.value = country.dialCode;
-                                  controller.countryName.value = country.name;
-                                });
-                                print(
-                                    'Country changed to: ${country.dialCode}');
-                                print(
-                                    'Country changed to name: ${country.name}');
-                              },
-                              onTap: () async {
-                                List<String> data =
-                                    await SharedPrefs.getNumberList();
-                                var dataType =
-                                    controller.myController.text = data.last;
-                                print("dataType:-  $dataType");
-                                List<String> data1 =
-                                    await SharedPrefs.getCountryNumberList();
-                                var dataType1 =
-                                    controller.data.value = data1.last;
-                                print("dataType:-  $dataType1");
-                                // var data =  controller.myController.text = AppSharedPreference.lastNumber.toString();
-                                // // AppSharedPreference.clear();
-                                //   controller.data.value = AppSharedPreference.lastNumberCode.toString();
-                              }),
-                          onTap: () {
-                            // Get.to(AddList());
-                          },
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  child: Text(StringsUtils.history),
+                                  value: 1,
+                                ),
+                                PopupMenuItem(
+                                  child: Text(StringsUtils.shareApp),
+                                  value: 2,
+                                ),
+                                PopupMenuItem(
+                                  child: Text(StringsUtils.rateApp),
+                                  value: 3,
+                                ),
+                                PopupMenuItem(
+                                  child: Text(StringsUtils.feedback),
+                                  value: 4,
+                                ),
+                                PopupMenuItem(
+                                  child: Text(StringsUtils.termsAndPrivacy),
+                                  value: 5,
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          height: 1.5.h,
-                        ),
-                        textField(
-                            focusNode: controller.confirmFocusNode,
-                            boxBorder: Border(),
-                            controller: controller.textController,
-                            hintText: StringsUtils.typeYourMessage,
-                            textInputType: TextInputType.text,
-                            onTap: () {
-                              showNumericContainer.value = false;
-                            },
-                            maxLines: 7,
-                            color: AppColor.whiteColor,
-                            textStyle:
-                                TextStyle(color: AppColors.grey, fontSize: 14),
-                            style: const TextStyle(
-                                fontSize: 16, color: AppColors.grey),
-                            cursorColor: Colors.black),
-                        SizedBox(
-                          height: 1.5.h,
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Padding(
+                          padding: EdgeInsets.only(top: 1.h, right: 5.w),
+                          child: Column(
                             children: [
-                             OpenWhatsApp(),
-                              SizedBox(
-                                width: 4.w,
+                              GestureDetector(
+                                child: phoneNumberTextField(
+                                    controller: controller.numberController,
+                                    showCursor: false,
+                                    onTapV: () async {
+                                      FocusScope.of(context).unfocus();
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 200));
+                                      showNumericContainer.value = true;
+                                    },
+                                    // focusNode: controller.focusNodes,
+                                    hintText: StringsUtils.phoneNumber,
+                                    textInputType: TextInputType.none,
+                                    valueChanged: (country) {
+                                      setState(() {
+                                        controller.data.value = country.dialCode;
+                                        controller.countryName.value = country.name;
+                                      });
+                                      print(
+                                          'Country changed to: ${country.dialCode}');
+                                      print(
+                                          'Country changed to name: ${country.name}');
+                                    },
+                                    onTap: () async {
+                                      List<String> data =
+                                          await SharedPrefs.getNumberList();
+                                      var dataType =
+                                          controller.numberController.text = data.last;
+                                      print("dataType:-  $dataType");
+                                      List<String> data1 =
+                                          await SharedPrefs.getCountryNumberList();
+                                      var dataType1 =
+                                          controller.data.value = data1.last;
+                                      print("dataType:-  $dataType1");
+                                      // var data =  controller.myController.text = AppSharedPreference.lastNumber.toString();
+                                      // // AppSharedPreference.clear();
+                                      //   controller.data.value = AppSharedPreference.lastNumberCode.toString();
+                                    }),
+                                onTap: () {
+                                  // Get.to(AddList());
+                                },
                               ),
-                             ShareLocationWhatsApp(),
                               SizedBox(
-                                width: 4.w,
+                                height: 1.5.h,
                               ),
-                              OpenTelegram(),
+                              textField(
+                                  focusNode: controller.confirmFocusNode,
+                                  boxBorder: Border(),
+                                  controller: controller.textController,
+                                  hintText: StringsUtils.typeYourMessage,
+                                  textInputType: TextInputType.text,
+                                  onTap: () {
+                                    showNumericContainer.value = false;
+                                  },
+                                  maxLines: 7,
+                                  color: AppColor.whiteColor,
+                                  textStyle:
+                                      TextStyle(color: AppColors.grey, fontSize: 14),
+                                  style: const TextStyle(
+                                      fontSize: 16, color: AppColors.grey),
+                                  cursorColor: Colors.black),
                               SizedBox(
-                                width: 4.w,
+                                height: 1.5.h,
                               ),
-                              UserNameTelegram(),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                   OpenWhatsApp(),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                   ShareLocationWhatsApp(),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    OpenTelegram(),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    UserNameTelegram(),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                    UserNameInstagram(),
+                                    SizedBox(
+                                      width: 4.w,
+                                    ),
+                                     Sms(),
+                                  ],
+                                ),
+                              ),
+                              showNumericContainer.value
+                                  ? NumPad(
+                                      buttonSize: 15.w,
+                                      buttonColor: AppColors.darkBlue,
+                                      iconColor: AppColors.green,
+                                      controller: controller.numberController,
+                                      delete: () {
+                                        controller.numberController.text =
+                                            controller.numberController.text.substring(
+                                                0,
+                                                controller.numberController.text.length -
+                                                    1);
+                                      },
+                                      clear: () {
+                                        controller.numberController.clear();
+                                      },
+                                      onSubmit: () {
+                                        debugPrint(
+                                            'Your code: ${controller.numberController.text}');
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => AlertDialog(
+                                            content: Text(
+                                              "You code is ${controller.numberController.text}",
+                                              style: const TextStyle(fontSize: 30),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : const SizedBox(),
                             ],
                           ),
                         ),
-                        showNumericContainer.value
-                            ? NumPad(
-                                buttonSize: 15.w,
-                                buttonColor: AppColors.darkBlue,
-                                iconColor: AppColors.green,
-                                controller: controller.myController,
-                                delete: () {
-                                  controller.myController.text =
-                                      controller.myController.text.substring(
-                                          0,
-                                          controller.myController.text.length -
-                                              1);
-                                },
-                                clear: () {
-                                  controller.myController.clear();
-                                },
-                                onSubmit: () {
-                                  debugPrint(
-                                      'Your code: ${controller.myController.text}');
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => AlertDialog(
-                                      content: Text(
-                                        "You code is ${controller.myController.text}",
-                                        style: const TextStyle(fontSize: 30),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                            : const SizedBox(),
                       ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }

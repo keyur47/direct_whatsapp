@@ -1,3 +1,4 @@
+import 'package:direct_whatsapp/modules/homepage/homepage.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/modules/popupmenubutton/history/contacts/contacts_number.dart';
@@ -8,6 +9,7 @@ import 'package:sizer/sizer.dart';
 
 class TabBarApp extends StatefulWidget {
   const TabBarApp({Key? key}) : super(key: key);
+  static const routeName = '/tabbar_screen';
 
   @override
   _TabBarAppState createState() => _TabBarAppState();
@@ -32,7 +34,7 @@ class _TabBarAppState extends State<TabBarApp> {
           backgroundColor: AppColors.darkBlue,
           child: Icon(Icons.home),
           onPressed: () {
-            Get.back();
+            Get.offAllNamed(HomePage.routeName);
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

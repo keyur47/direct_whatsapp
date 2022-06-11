@@ -18,10 +18,10 @@ class OpenWhatsApp extends StatelessWidget {
     return button(
         onTap: () async {
           if (controller
-              .myController.text.isNotEmpty) {
+              .numberController.text.isNotEmpty) {
             if (controller.data.isNotEmpty) {
               controller.numberList.addAll(
-                  [controller.myController.text]);
+                  [controller.numberController.text]);
               await SharedPrefs.setNumberList(
                   controller.numberList);
               print("object${controller.numberList}");
@@ -38,7 +38,7 @@ class OpenWhatsApp extends StatelessWidget {
               print(
                   "CountryObjectName${controller.nameCountryList}");
               controller.url.value =
-              "https://wa.me/+${controller.data.value}${controller.myController.text}?text=${controller.textController.text}";
+              "https://wa.me/+${controller.data.value}${controller.numberController.text}?text=${controller.textController.text}";
               await launch(controller.url.value);
               print("------${controller.url.value}");
             } else {

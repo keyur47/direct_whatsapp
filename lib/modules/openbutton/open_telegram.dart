@@ -17,10 +17,10 @@ class OpenTelegram extends StatelessWidget {
     return button(
         onTap: () async {
           if (controller
-              .myController.text.isNotEmpty) {
+              .numberController.text.isNotEmpty) {
             if(controller.data.value.isNotEmpty) {
               controller.numberList.addAll(
-                  [controller.myController.text]);
+                  [controller.numberController.text]);
               await SharedPrefs.setNumberList(
                   controller.numberList);
               print("object${controller.numberList}");
@@ -38,7 +38,7 @@ class OpenTelegram extends StatelessWidget {
                   "CountryObjectName${controller.nameCountryList}");
               controller.url.value =
               "https://telegram.me/+${controller.data.value}${controller
-                  .myController.text}";
+                  .numberController.text}";
               await launch(controller.url.value);
               print("------${controller.url.value}");
             }else{

@@ -1,8 +1,10 @@
 import 'package:direct_whatsapp/modules/homepage/homepage.dart';
+import 'package:direct_whatsapp/modules/popupmenubutton/history/bottom_navigationbar.dart';
 import 'package:direct_whatsapp/modules/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
 import 'modules/controller/controller.dart';
 
 void main() async {
@@ -29,21 +31,27 @@ class MyApp extends StatelessWidget {
             showNumericContainer.value = true;
           },
           child: GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              initialRoute: SplashScreen.routeName,
-              initialBinding: AppBidding(),
-              getPages: [
-                GetPage(
-                  name: SplashScreen.routeName,
-                  page: () => const SplashScreen(),
-                  transition: Transition.leftToRight,
-                ),
-                GetPage(
-                  name: HomePage.routeName,
-                  page: () => HomePage(),
-                  transition: Transition.leftToRight,
-                ),
-              ]),
+            debugShowCheckedModeBanner: false,
+            initialRoute: SplashScreen.routeName,
+            initialBinding: AppBidding(),
+            getPages: [
+              GetPage(
+                name: SplashScreen.routeName,
+                page: () => const SplashScreen(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
+                name: HomePage.routeName,
+                page: () => HomePage(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
+                name: TabBarApp.routeName,
+                page: () => TabBarApp(),
+                transition: Transition.leftToRight,
+              ),
+            ],
+          ),
         );
       },
     );

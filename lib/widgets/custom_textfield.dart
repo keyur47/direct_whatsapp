@@ -1,5 +1,8 @@
+import 'package:direct_whatsapp/modules/controller/controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sizer/sizer.dart';
@@ -58,6 +61,8 @@ Widget phoneNumberTextField({
   );
 }
 
+
+Controller controller = Get.find();
 ///
 Widget textField({required TextEditingController? controller,required int maxLines,required Color color,required TextStyle textStyle,required TextStyle style,
     //bool? showCursor,
@@ -67,6 +72,7 @@ Widget textField({required TextEditingController? controller,required int maxLin
   required BoxBorder? boxBorder,
   ValueChanged<String>? valueChanged,
   FormFieldValidator<String>? validator,
+  Widget? suffixIcon,
     required VoidCallback onTap}) {
   return Container(
     decoration: BoxDecoration(
@@ -81,6 +87,7 @@ Widget textField({required TextEditingController? controller,required int maxLin
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: textStyle,
+          suffixIcon: suffixIcon
         ),
         controller: controller,
         onChanged: valueChanged,

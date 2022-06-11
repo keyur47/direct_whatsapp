@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 
 class UserName extends StatefulWidget {
   UserName({Key? key}) : super(key: key);
+  static const routeName = '/username_screen';
 
   @override
   State<UserName> createState() => _UserNameState();

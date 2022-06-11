@@ -6,9 +6,12 @@ class StringsUtils {
   static const String sendFeedBack = 'Send FeedBack';
   static const String phoneNumber = 'Phone Number';
   static const String openWhatsApp = 'Open WhatsApp';
+  static const String openMessages = 'Open Messages';
   static const String shareLocation = 'Share Location';
   static const String openTelegram = 'Open Telegram';
   static const String userNameTelegram = 'UserName Telegram';
+  static const String userNameInstagram = 'UserName Instagram';
+  static const String Messages = 'Messages';
   static const String userNameHistory = 'UserName History';
   static const String history = 'History';
   static const String userName = 'UserName';

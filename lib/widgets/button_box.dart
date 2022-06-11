@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 Widget button(
     {required String text,
     required VoidCallback onTap,
-    required IconData iconData,
+     IconData? iconData,
     required Color textColor,
     required Color boxColor,
     required Color iconColor}) {
