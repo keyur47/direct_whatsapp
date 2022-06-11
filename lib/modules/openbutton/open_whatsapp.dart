@@ -9,10 +9,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OpenWhatsApp extends StatelessWidget {
-   OpenWhatsApp({Key? key}) : super(key: key);
-
-  Controller controller = Get.find();
-
+   Controller controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return button(

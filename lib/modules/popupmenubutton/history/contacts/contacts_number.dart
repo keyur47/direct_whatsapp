@@ -1,5 +1,6 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/modules/controller/controller.dart';
+import 'package:direct_whatsapp/modules/homepage/homepage.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:sizer/sizer.dart';
 
 
 class AddList extends StatefulWidget {
-  AddList({Key? key}) : super(key: key);
 
   @override
   State<AddList> createState() => _AddListState();
@@ -63,7 +63,6 @@ class _AddListState extends State<AddList> {
                                 EdgeInsets.only(left: 5.w, right: 5.w, top: 1.h),
                             child: Container(
                                 height: 7.h,
-
                                 decoration: BoxDecoration(
                                 color: AppColor.backgroundColor,
                                     borderRadius: BorderRadius.circular(10),
@@ -74,7 +73,7 @@ class _AddListState extends State<AddList> {
                                       onTap: () {
                                         controller.numberController.text = controller.numberList[i];
                                         controller.data.value = controller.countryList[i];
-                                        Get.back();
+                                        Get.offAllNamed(HomePage.routeName);
                                       },
                                       child: Padding(
                                         padding:

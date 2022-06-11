@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class TabBarApp extends StatefulWidget {
-  const TabBarApp({Key? key}) : super(key: key);
   static const routeName = '/tabbar_screen';
 
   @override
@@ -17,6 +16,7 @@ class TabBarApp extends StatefulWidget {
 
 class _TabBarAppState extends State<TabBarApp> {
   int currentTab = 0;
+
   final List<Widget> screens = [AddList(),UserName()];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -67,7 +67,7 @@ class _TabBarAppState extends State<TabBarApp> {
                               color: currentTab == 0 ? AppColors.red : AppColors.darkBlue,
                             ),
                             Text(
-                              StringsUtils.aboutApp,
+                              StringsUtils.contacts,
                               style: TextStyle(
                                 color: currentTab == 0 ?AppColors.red : AppColors.darkBlue,
                               ),

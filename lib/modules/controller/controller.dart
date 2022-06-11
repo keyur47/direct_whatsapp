@@ -20,11 +20,13 @@ class Controller extends GetxController {
   List<String> countryList = [];
   List<String> nameCountryList = [];
   List<String> nameTelegramList = [];
+  // List<String> nameInstagramList = [];
+  // List<String> SmsList = [];
   FocusNode emailFocusNode = FocusNode();
   FocusNode passwordFocusNode = FocusNode();
   FocusNode confirmFocusNode = FocusNode();
   RxString errorMessage = "".obs;
-
+  RxBool Icon = false.obs;
 
   void validateEmail(String val) {
     if(val.isEmpty){
@@ -38,9 +40,7 @@ class Controller extends GetxController {
 
 
 
-
 }
-
 
 
 // void onInit() {

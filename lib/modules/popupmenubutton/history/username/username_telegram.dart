@@ -1,5 +1,6 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/modules/controller/controller.dart';
+import 'package:direct_whatsapp/modules/homepage/homepage.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class _UserNameState extends State<UserName> {
                                   onTap: () {
                                     controller.textController.text =
                                         controller.nameTelegramList[i];
-                                    Get.back();
+                                    Get.offAllNamed(HomePage.routeName);
                                   },
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,

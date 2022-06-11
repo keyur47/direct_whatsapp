@@ -17,11 +17,12 @@ class StringsUtils {
   static const String userName = 'UserName';
   static const String whatsDirect = 'WhatsDirect';
   static const String whatsDirects = 'Direct\nWhatsApp';
-  static const String aboutApp = 'Contacts';
+  static const String contacts = 'Contacts';
   static const String contactsHistory = 'Contacts History';
   static const String shareApp = 'Share App';
   static const String rateApp = 'Rate App';
   static const String feedback = 'Feedback';
+  static const String aboutApp = 'About App';
   static const String termsAndPrivacy = "Terms and Privacy";
   static const String feedBackMessages = "Top a star to rate it on the \n App Store.";
   static const String feedBackTitle = "Enjoying Direct WhatsApp";

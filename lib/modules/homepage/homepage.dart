@@ -7,6 +7,7 @@ import 'package:direct_whatsapp/modules/openbutton/open_whatsapp.dart';
 import 'package:direct_whatsapp/modules/openbutton/share_location.dart';
 import 'package:direct_whatsapp/modules/openbutton/sms.dart';
 import 'package:direct_whatsapp/modules/openbutton/username_telegram.dart';
+import 'package:direct_whatsapp/modules/popupmenubutton/about/about_app.dart';
 import 'package:direct_whatsapp/modules/popupmenubutton/feedback/feedback.dart';
 import 'package:direct_whatsapp/modules/popupmenubutton/rate/rate.dart';
 import 'package:direct_whatsapp/modules/popupmenubutton/share/shareapp.dart';
@@ -20,9 +21,7 @@ import 'package:sizer/sizer.dart';
 import '../controller/controller.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
   static const routeName = '/homePage_screen';
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -30,42 +29,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Controller controller = Get.find();
 
-  bool _showClearButton = false;
-
-  @override
-  void initState() {
-    super.initState();
-    controller.textController.addListener(() {
-      setState(() {
-        _showClearButton =   controller.textController.text.length > 0;
-      });
-    });
-  }
-
-  Widget _getClearButton() {
-    if (!_showClearButton) {
-      return Text("");
-    }
-    return Padding(
-      padding: EdgeInsets.only(bottom: 0),
-      child: IconButton(
-        onPressed: () =>   controller.textController.clear(),
-        icon: Icon(Icons.clear),
-      ),
-    );
-  }
-
-  TextFormField _getTextField() {
-    return TextFormField(
-      maxLength: 1000,
-      maxLines: 1,
-      controller:  controller.textController,
-      decoration: InputDecoration(
-        hintText: "Enter a beautiful text",
-        suffixIcon: _getClearButton(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Row(
                               children: [
+                                // Image.asset("assets/image/direct_chat.png",width: 5.w) ,
                                 Icon(Icons.whatsapp,
                                     size: 16.w,
                                     color: AppColor.appColors,
@@ -122,7 +86,10 @@ class _HomePageState extends State<HomePage> {
                                   RateBox(context);
                                 } else if (value == 4) {
                                   FeedbackBox(context);
-                                } else {
+                                } else if (value == 6) {
+                                  Get.to(AboutApp());
+                                }else {
+
                                 }
                                 print("Value:- $value");
                               },
@@ -146,6 +113,9 @@ class _HomePageState extends State<HomePage> {
                                 PopupMenuItem(
                                   child: Text(StringsUtils.termsAndPrivacy),
                                   value: 5,
+                                ), PopupMenuItem(
+                                  child: Text(StringsUtils.aboutApp),
+                                  value: 6,
                                 ),
                               ],
                             )

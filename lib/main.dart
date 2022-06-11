@@ -12,13 +12,15 @@ void main() async {
   // SharedPrefs.numberList(['123', '456']);
   // List<String> data = await SharedPrefs.getNumberList();
   // print("------------>>> ${data.join('').toString()}");
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 RxBool showNumericContainer = true.obs;
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,10 @@ class MyApp extends StatelessWidget {
             showNumericContainer.value = true;
           },
           child: GetMaterialApp(
+            theme: ThemeData(
+                colorScheme: Theme.of(context)
+                    .colorScheme
+                    .copyWith(secondary: Colors.red)),
             debugShowCheckedModeBanner: false,
             initialRoute: SplashScreen.routeName,
             initialBinding: AppBidding(),

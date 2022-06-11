@@ -29,8 +29,8 @@ class _UserNameInstagramState extends State<UserNameInstagram> {
             await SharedPrefs.setUserNameList(
                 controller.nameTelegramList);
             print("object${controller.numberList}");
-            controller.url.value =
-            "instagram://user?username=${controller.textController.text}";
+            controller.url.value = "instagram://user?username=${controller.textController.text}";
+            // controller.url.value = "https://www.instagram.com/${controller.textController.text}/";
             await launch(controller.url.value);
             print("------${controller.url.value}");
           } else {

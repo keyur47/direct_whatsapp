@@ -52,6 +52,21 @@ class SharedPrefs {
   }
 
 
+  static Future<void> setIconList(List<String> setIconList) async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.setStringList("setIconList", setIconList);
+  }
+
+  static Future<List<String>> getIconList() async {
+    final SharedPreferences prefs = await prefsData;
+    return prefs.getStringList("setIconList") ?? [];
+  }
+
+
+
+
+
+
   static Future<void> clear() async {
    final SharedPreferences prefs = await prefsData;
    await prefs.clear();
