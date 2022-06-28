@@ -1,4 +1,3 @@
-import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +8,7 @@ class AppSnackBar {
         snackPosition: snackPosition,
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
         borderRadius: 8,
-        backgroundColor: Colors.black12,
+        backgroundColor: Colors.grey[200],
         animationDuration: const Duration(milliseconds: 500),
         barBlur: 10,
         colorText: Colors.black,

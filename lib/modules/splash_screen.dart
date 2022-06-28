@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:direct_whatsapp/helper/exception/app_exception.dart';
-import 'package:direct_whatsapp/modules/homepage/homepage.dart';
+import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
+import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -108,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _timer = Timer.periodic(
       const Duration(seconds: 2),
           (timer) {
-        Get.offAllNamed(HomePage.routeName);
+        Get.offAllNamed(WhatsApp.routeName);
       },
     );
   }

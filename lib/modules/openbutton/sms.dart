@@ -8,6 +8,7 @@ import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/widgets/button_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Sms extends StatefulWidget {
@@ -25,9 +26,9 @@ class _SmsState extends State<Sms> {
   Widget build(BuildContext context) {
     return button(
         onTap: () async {
-          if (controller.numberController.text.isNotEmpty) {
+          if (controller.smsNumberController.text.isNotEmpty) {
             if (controller.data.isNotEmpty) {
-              controller.numberList.addAll([controller.numberController.text]);
+              controller.numberList.addAll([controller.smsNumberController.text]);
               await SharedPrefs.setNumberList(controller.numberList);
               print("object${controller.numberList}");
               controller.countryList.addAll([controller.data.value]);
@@ -38,12 +39,12 @@ class _SmsState extends State<Sms> {
               print("CountryObjectName${controller.nameCountryList}");
               if (Platform.isAndroid) {
                 final uri =
-                    'sms:+${controller.data.value}${controller.numberController.text}?body=${controller.textController.text}%20';
+                    'sms:+${controller.data.value}${controller.smsNumberController.text}?body=${controller.smsTextController.text}%20';
                 log("Sms :- $uri");
                 await launch(uri);
               } else if (Platform.isIOS) {
                 final uri =
-                    'sms:${controller.numberController.text}&body=${controller.textController.text}%20';
+                    'sms:${controller.smsNumberController.text}&body=${controller.smsTextController.text}%20';
                 await launch(uri);
               }
             } else {
@@ -71,9 +72,17 @@ class _SmsState extends State<Sms> {
           }
         },
         text: StringsUtils.Messages,
-        iconData: Icons.message,
+         iconData: Icons.message,
+        image: "assets/image/whatsapp.png",
+        scale: 3,
+        top: 1.5.h,
+        left: 1.5.h,
+        right: 1.5.h,
+        bottom: 1.5.h,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: AppColors.darkBlue);
+        iconColor: AppColors.darkBlue,
+        sizeIcon: 7.w
+    );
   }
 }

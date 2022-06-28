@@ -1,8 +1,8 @@
 import 'package:direct_whatsapp/modules/controller/controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sizer/sizer.dart';
@@ -34,7 +34,7 @@ Widget phoneNumberTextField({
         border: Border(right: BorderSide(color: Colors.grey, width: 1)),
       ),
       onCountryChanged: valueChanged,
-      initialCountryCode: "",
+      initialCountryCode: "IN",
       dropdownTextStyle: const TextStyle(color: AppColors.grey, fontSize: 16),
       showDropdownIcon: true,
       showCountryFlag: false,
@@ -60,6 +60,40 @@ Widget phoneNumberTextField({
     ),
   );
 }
+
+
+
+
+
+Widget usernameTextField({
+  required TextEditingController? controller,
+  required bool? showCursor,
+  required String? hintText,
+  required TextInputType textInputType,
+  required GestureTapCallback onTap,
+}) {
+  return Container(
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5.h), color: Colors.white),
+    child: TextFormField(
+      controller: controller,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter(RegExp(r'[a-z_.0-9]'), allow: true)        ],
+      decoration: InputDecoration(
+        enabled: true,
+        contentPadding: EdgeInsets.only(top: 1.7.h),
+        border: InputBorder.none,
+        prefixIcon: Icon(Icons.search),
+        suffixIcon: GestureDetector(
+            onTap: onTap,
+            child: Icon(Icons.close)),
+        hintText: hintText
+      )
+    ),
+  );
+}
+
+
 
 
 Controller controller = Get.find();

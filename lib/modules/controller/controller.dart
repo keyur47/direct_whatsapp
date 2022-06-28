@@ -6,27 +6,27 @@ import 'package:get/get.dart';
 class Controller extends GetxController {
 
   TextEditingController numberController = TextEditingController();
+  TextEditingController smsNumberController = TextEditingController();
   TextEditingController textController = TextEditingController();
+  TextEditingController smsTextController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController emailFeedBackController = TextEditingController();
   TextEditingController FeedBackController = TextEditingController();
-  FocusNode focusNode = FocusNode();
-  FocusNode focusNodes = FocusNode();
-  RxBool isOpenKeyboard  = false.obs;
-  RxString url = ''.obs;
-  RxString data = ''.obs;
-  RxString countryName = ''.obs;
-  String allData = "";
+  PageController pageController = PageController();
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+  FocusNode confirmFocusNode = FocusNode();
   List<String> numberList = [];
   List<String> countryList = [];
   List<String> nameCountryList = [];
   List<String> nameTelegramList = [];
-  // List<String> nameInstagramList = [];
-  // List<String> SmsList = [];
-  FocusNode emailFocusNode = FocusNode();
-  FocusNode passwordFocusNode = FocusNode();
-  FocusNode confirmFocusNode = FocusNode();
-  RxString errorMessage = "".obs;
+  List<String> dateTime = [];
+  RxBool isOpenKeyboard  = false.obs;
   RxBool Icon = false.obs;
+  RxString url = ''.obs;
+  RxString data = ''.obs;
+  RxString countryName = ''.obs;
+  RxString errorMessage = "".obs;
 
   void validateEmail(String val) {
     if(val.isEmpty){

@@ -4,24 +4,38 @@ import 'package:sizer/sizer.dart';
 Widget button(
     {required String text,
     required VoidCallback onTap,
-     IconData? iconData,
+    IconData? iconData,
     required Color textColor,
     required Color boxColor,
+    Color? ImageColor,
+    double? scale,
+    required double left,
+    required double right,
+    required double top,
+    required double bottom,
+    double? width,
+    bool? obscure,
+    String? image,
+      double? sizeIcon,
     required Color iconColor}) {
-  return InkWell(
+  return GestureDetector(
     onTap: onTap,
     child: Container(
       decoration: BoxDecoration(
           color: boxColor, borderRadius: BorderRadius.circular(10.w)),
       child: Center(
         child: Padding(
-          padding: EdgeInsets.only(left: 2.5.w, right: 2.5.w,top: 1.5.h,bottom: 1.5.h),
+          padding: EdgeInsets.only(
+              left: left, right: right, top: top, bottom: bottom),
           child: Row(
             children: [
-              Icon(
-                iconData,
-                color: iconColor,
-              ),
+              obscure == false
+                  ? Image.asset(
+                      "${image}",
+                      color: ImageColor,
+                      scale: scale,
+                    )
+                  : Icon(iconData,color: iconColor,size: sizeIcon),
               SizedBox(
                 width: 1.w,
               ),
@@ -29,7 +43,7 @@ Widget button(
                 text,
                 style: TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w300,
                     color: textColor),
                 textAlign: TextAlign.center,
               ),
@@ -40,3 +54,5 @@ Widget button(
     ),
   );
 }
+
+

@@ -64,6 +64,15 @@ class SharedPrefs {
 
 
 
+  static Future<void> setDateTimeList(List<String> dateTimeList) async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.setStringList("dateTimeList", dateTimeList);
+  }
+
+  static Future<List<String>> getDateTimeList() async {
+    final SharedPreferences prefs = await prefsData;
+    return prefs.getStringList("dateTimeList") ?? [];
+  }
 
 
 

@@ -1,8 +1,10 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/modules/controller/controller.dart';
-import 'package:direct_whatsapp/modules/homepage/homepage.dart';
+import 'package:direct_whatsapp/modules/instagram/instagram,dart.dart';
+import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
+import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -70,9 +72,9 @@ class _UserNameState extends State<UserName> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    controller.textController.text =
+                                    controller.usernameController.text =
                                         controller.nameTelegramList[i];
-                                    Get.offAllNamed(HomePage.routeName);
+                                   Get.to(WhatsApp());
                                   },
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,

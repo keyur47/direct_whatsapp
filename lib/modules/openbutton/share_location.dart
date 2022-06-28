@@ -4,10 +4,12 @@ import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/appsnackbar.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/widgets/button_box.dart';
+import 'package:direct_whatsapp/widgets/custom_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ShareLocationWhatsApp extends StatelessWidget {
@@ -67,8 +69,17 @@ class ShareLocationWhatsApp extends StatelessWidget {
         },
         text: StringsUtils.shareLocation,
         iconData: Icons.location_on_outlined,
+        image: "assets/image/whatsapp.png",
+        scale: 3,
+        top: 1.5.h,
+        left: 1.5.h,
+        right: 1.5.h,
+        bottom: 1.5.h,
+        ImageColor: AppColors.green,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: AppColors.green);
+        iconColor: AppColors.green,
+        sizeIcon: 7.w
+    );
   }
 }

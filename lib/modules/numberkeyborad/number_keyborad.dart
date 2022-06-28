@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class NumPad extends StatelessWidget {
   final double? buttonSize;
@@ -11,7 +12,7 @@ class NumPad extends StatelessWidget {
 
   const NumPad({
     Key? key,
-    this.buttonSize = 10,
+    this.buttonSize = 0,
     this.buttonColor = Colors.indigo,
     this.iconColor = Colors.amber,
     required this.delete,
@@ -26,7 +27,7 @@ class NumPad extends StatelessWidget {
       // margin: const EdgeInsets.only(left: 0, right: 0),
       child: Column(
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 2.5.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -50,7 +51,7 @@ class NumPad extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 2.5.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -74,7 +75,7 @@ class NumPad extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 2.5.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -98,13 +99,15 @@ class NumPad extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 1.5.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
                 focusColor: Colors.transparent,
                 onPressed: () => clear(),
+                color: Colors.transparent,
+                splashColor: Colors.transparent,
                 icon: Icon(
                   Icons.copyright,
                   color: iconColor,

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppException implements Exception {
-  //un_known error code -> 0
 
   late final String message;
   final String? tag;
