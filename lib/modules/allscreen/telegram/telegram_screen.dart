@@ -1,10 +1,9 @@
 import 'package:direct_whatsapp/modules/appbar/appbar.dart';
-import 'package:direct_whatsapp/modules/controller/controller.dart';
-import 'package:direct_whatsapp/modules/openbutton/username_telegram.dart';
+import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
+import 'package:direct_whatsapp/modules/openbutton/open_username_telegram.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/widgets/custom_textfield.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -46,12 +45,12 @@ class _TelegramState extends State<Telegram> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 usernameTextField(
-                    controller: controller.usernameController,
+                    controller: controller.telegramUsernameController,
                     showCursor: false,
                     hintText: StringsUtils.username,
                     textInputType: TextInputType.none,
                     onTap: () async {
-                      controller.usernameController.clear();
+                      controller.telegramUsernameController.clear();
                     }),
               ],
             ),
@@ -62,7 +61,7 @@ class _TelegramState extends State<Telegram> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              UserNameTelegram(),
+              OpenUserNameTelegram(),
             ],
           ),
         ],

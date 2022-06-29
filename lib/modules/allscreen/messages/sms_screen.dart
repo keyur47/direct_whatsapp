@@ -1,12 +1,11 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/main.dart';
 import 'package:direct_whatsapp/modules/appbar/appbar.dart';
-import 'package:direct_whatsapp/modules/controller/controller.dart';
+import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/modules/numberkeyborad/number_keyborad.dart';
-import 'package:direct_whatsapp/modules/openbutton/sms.dart';
+import 'package:direct_whatsapp/modules/openbutton/open_number_sms.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
-import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';
 import 'package:direct_whatsapp/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -111,7 +110,7 @@ class _SmsNumberState extends State<SmsNumber> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Sms(),
+                    OpenSmsNumber(),
                   ],
                 ),
                 showNumericContainer.value

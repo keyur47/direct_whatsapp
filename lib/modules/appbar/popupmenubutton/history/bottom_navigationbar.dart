@@ -1,6 +1,6 @@
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/contacts/contacts_number.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/username/username_telegram.dart';
-import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/username/username.dart';
+import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';

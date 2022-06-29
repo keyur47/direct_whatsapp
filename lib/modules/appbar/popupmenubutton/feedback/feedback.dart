@@ -1,4 +1,4 @@
-import 'package:direct_whatsapp/modules/controller/controller.dart';
+import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/appsnackbar.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';

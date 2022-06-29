@@ -1,14 +1,14 @@
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
-import 'package:direct_whatsapp/modules/instagram/instagram,dart.dart';
-import 'package:direct_whatsapp/modules/sms/sms.dart';
-import 'package:direct_whatsapp/modules/telegram/telegram_screen.dart';
-import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
-import 'package:direct_whatsapp/modules/splash_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/messages/sms_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
+import 'package:direct_whatsapp/modules/splash/splash_screen.dart';
 import 'package:direct_whatsapp/utils/my_behavior.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import 'modules/controller/controller.dart';
+import 'modules/controller/all_screen_controller.dart';
 import 'widgets/bottom_navigation_bar.dart';
 
 void main() async {

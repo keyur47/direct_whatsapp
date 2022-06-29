@@ -52,6 +52,9 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   bootstrap_icons: ^1.8.1
   neon: ^0.1.0
+  animated_text_kit: ^4.2.2
+  fade_out_particle: ^1.1.1
+  flutter_swipe_action_cell: ^3.0.4
 
 dev_dependencies:
   flutter_test:

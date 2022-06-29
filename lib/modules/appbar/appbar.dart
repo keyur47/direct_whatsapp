@@ -1,20 +1,20 @@
-import 'dart:math';
-
-import 'package:direct_whatsapp/modules/appbar/app.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:direct_whatsapp/modules/appbar/appbar_controller.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/about/about_app.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/feedback/feedback.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/rate/rate.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/share/shareapp.dart';
-import 'package:direct_whatsapp/modules/instagram/instagram,dart.dart';
-import 'package:direct_whatsapp/modules/sms/sms.dart';
-import 'package:direct_whatsapp/modules/telegram/telegram_screen.dart';
-import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
+import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/messages/sms_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
+import 'package:fade_out_particle/fade_out_particle.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:neon/neon.dart';
 import 'package:sizer/sizer.dart';
 
 class customAppbar extends StatelessWidget {
@@ -51,75 +51,147 @@ class customAppbar extends StatelessWidget {
     "${StringsUtils.smsDirects}",
   ];
 
-  BordController controller = Get.put(BordController());
+  AppbarController controller = Get.put(AppbarController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(left: 4.w, top: 2.w),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
+      child: Stack(
+        children: [
+          // Image.network(
+          //   "https://thumbs.gfycat.com/AccurateScrawnyAnkole-size_restricted.gif",
+          //   height: 8.h,
+          //   width: 100.w,
+          //   fit: BoxFit.cover,
+          // ),
+          Padding(
+            padding: EdgeInsets.only(left: 4.w, top: 2.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: gradient),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: top, bottom: bottom, right: right, left: left),
-                    child: Icon(
-                      icon,
-                      size: size,
-                      color: iconColor,
-                      // shadows: [
-                      //   BoxShadow(
-                      //     color: iconColors.withOpacity(0.8),
-                      //     spreadRadius: 10,
-                      //     blurRadius: 7,
-                      //     offset: const Offset(
-                      //         2, 1), // changes position of shadow
-                      //   ),
-                      // ]
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: gradient),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: top, bottom: bottom, right: right, left: left),
+                        child: Icon(
+                          icon,
+                          size: size,
+                          color: iconColor,
+                          // shadows: [
+                          //   BoxShadow(
+                          //     color: iconColors.withOpacity(0.8),
+                          //     spreadRadius: 10,
+                          //     blurRadius: 7,
+                          //     offset: const Offset(
+                          //         2, 1), // changes position of shadow
+                          //   ),
+                          // ]
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  width: 2.w,
-                ),
-                PopupMenuButton(
-                  child: Neon(
-                    text: '${data[controller.pageIndex.value]}',
-                    color:  Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                    fontSize: 18,
-                    font: NeonFont.Automania,
-                    flickeringText: true,
-                    flickeringLetters: null,
-                    glowingDuration: Duration(seconds: 1),
-                  ),
+                    SizedBox(
+                      width: 2.w,
+                    ),
+                    DefaultTextStyle(
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontFamily: 'Customtext',
+                        color: AppColors.darkBlue
+                      ),
+                      child: Obx(()=>
+                          AnimatedTextKit(
+                          pause: Duration(milliseconds: 100),
+                          animatedTexts: [
+                            WavyAnimatedText('${data[controller.pageIndex.value]}'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    PopupMenuButton(
+                      elevation: 20,
 
-                  // Padding(
-                  //   padding:  EdgeInsets.only(),
-                  //   child: Obx(()=> Text("${data[controller.pageIndex.value]}",style: TextStyle(
-                  //       fontSize: 26,
-                  //       fontFamily: "Customtext",
-                  //       color: AppColors.darkBlue,
-                  //       fontWeight: FontWeight.w700),)),
-                  // ),
+                      // child: Neon(
+                      //   textStyle: TextStyle(),
+                      //   text: '${data[controller.pageIndex.value]}',
+                      //   color:  Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                      //   fontSize: 18,
+                      //   font: NeonFont.TextMeOne,
+                      //   flickeringText: true,
+                      //   flickeringLetters: null,
+                      //   glowingDuration: Duration(seconds: 1),
+                      // ),
+
+                      child:
+                          Icon(Icons.keyboard_arrow_down_sharp),
+                          // Text("${data[controller.pageIndex.value]}",style: TextStyle(
+                          // fontSize: 18,
+                          // fontFamily: "Customtext",
+                          // color:   AppColors.darkBlue,
+                          // fontWeight: FontWeight.w700))
+
+                      onSelected: (int value) {
+                        controller.popupMenuItemIndex.value = value;
+                        if (controller.popupMenuItemIndex.value == 1) {
+                          Get.to(WhatsApp());
+                        } else if (controller.popupMenuItemIndex.value == 2) {
+                          Get.to(Instagram());
+                        } else if (controller.popupMenuItemIndex.value == 3) {
+                          Get.to(Telegram());
+                        } else if (controller.popupMenuItemIndex.value == 4) {
+                          Get.to(SmsNumber());
+                        } else {}
+                        // controller.value.value = "${controller.popupMenuItemIndex.value}";
+                        controller.pageIndex.value =
+                            controller.popupMenuItemIndex.value;
+                        print("Value:- $value");
+                        print("Value12:- ${ controller.popupMenuItemIndex.value}");
+                        print("Value14:- ${ controller.value.value}");
+                        print("Value19:- ${ controller.pageIndex.value}");
+                      },
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: Center(child: Text(StringsUtils.whatsApp,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue),)),
+                          value: 1,
+                        ),
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: Center(child: Text(StringsUtils.instagram,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue))),
+                          value: 2,
+                        ),
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: Center(child: Text(StringsUtils.telegram,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue))),
+                          value: 3,
+                        ),
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: Center(child: Text(StringsUtils.sms,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue))),
+                          value: 4,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+
+                PopupMenuButton(
                   onSelected: (int value) {
-                    controller.popupMenuItemIndex.value = value;
-                    if (controller.popupMenuItemIndex.value == 1) {
-                      Get.to(WhatsApp());
-                    } else if (controller.popupMenuItemIndex.value == 2) {
-                      Get.to(Instagram());
-                    } else if (controller.popupMenuItemIndex.value == 3) {
-                      Get.to(Telegram());
-                    } else if (controller.popupMenuItemIndex.value == 4) {
-                      Get.to(SmsNumber());
-                    } else {}
-                    // controller.value.value = "${controller.popupMenuItemIndex.value}";
+                    if (value == 1) {
+                      Get.offAllNamed(TabBarApp.routeName);
+                    } else if (value == 2) {
+                      Share();
+                    } else if (value == 3) {
+                      RateBox(context);
+                    } else if (value == 4) {
+                      FeedbackBox(context);
+                    } else if (value == 5) {} else {
+                      Get.to(AboutApp());
+                    }
                     controller.pageIndex.value =
                         controller.popupMenuItemIndex.value;
                     print("Value:- $value");
@@ -127,125 +199,39 @@ class customAppbar extends StatelessWidget {
                     print("Value14:- ${ controller.value.value}");
                     print("Value19:- ${ controller.pageIndex.value}");
                   },
-                  // onSelected: (int value) {
-                  //   controller.popupMenuItemIndex.value = value;
-                  //   if (controller.popupMenuItemIndex.value  == 1) {
-                  //     Get.offAllNamed(TabBarApp.routeName);
-                  //   } else if (controller.popupMenuItemIndex.value  == 2) {
-                  //     Share();
-                  //   } else if (controller.popupMenuItemIndex.value  == 3) {
-                  //     RateBox(context);
-                  //   } else if (controller.popupMenuItemIndex.value  == 4) {
-                  //     FeedbackBox(context);
-                  //   } else {
-                  //   }
-                  //   // controller.value.value = "${controller.popupMenuItemIndex.value}";
-                  //   controller.pageIndex.value = controller.popupMenuItemIndex.value;
-                  //   print("Value:- $value");
-                  //   print("Value12:- ${ controller.popupMenuItemIndex.value}");
-                  //   print("Value14:- ${ controller.value.value}");
-                  //   print("Value19:- ${ controller.pageIndex.value}");
-                  // },
+
                   itemBuilder: (context) =>
                   [
                     PopupMenuItem(
-                      child: Text(StringsUtils.whatsDirects),
+                      child: Text(StringsUtils.history),
                       value: 1,
                     ),
                     PopupMenuItem(
-                      child: Text(StringsUtils.instagramDirects),
+                      child: Text(StringsUtils.shareApp),
                       value: 2,
                     ),
                     PopupMenuItem(
-                      child: Text(StringsUtils.telegramDirects),
+                      child: Text(StringsUtils.rateApp),
                       value: 3,
                     ),
                     PopupMenuItem(
-                      child: Text(StringsUtils.smsDirects),
+                      child: Text(StringsUtils.feedback),
                       value: 4,
                     ),
+                    PopupMenuItem(
+                      child: Text(StringsUtils.termsAndPrivacy),
+                      value: 5,
+                    ),
+                    PopupMenuItem(
+                      child: Text(StringsUtils.aboutApp),
+                      value: 6,
+                    ),
                   ],
-                  // itemBuilder: (context) => [
-                  //   PopupMenuItem(
-                  //     child: Text(StringsUtils.history),
-                  //     value: 1,
-                  //   ),
-                  //   PopupMenuItem(
-                  //     child: Text(StringsUtils.shareApp),
-                  //     value: 2,
-                  //   ),
-                  //   PopupMenuItem(
-                  //     child: Text(StringsUtils.rateApp),
-                  //     value: 3,
-                  //   ),
-                  //   PopupMenuItem(
-                  //     child: Text(StringsUtils.feedback),
-                  //     value: 4,
-                  //   ),
-                  //   PopupMenuItem(
-                  //     child: Text(StringsUtils.termsAndPrivacy),
-                  //     value: 5,
-                  //   ),
-                  //   PopupMenuItem(
-                  //     child: Text(StringsUtils.aboutApp),
-                  //     value: 6,
-                  //   ),
-                  // ],
-                ),
+                )
               ],
             ),
-
-            PopupMenuButton(
-              onSelected: (int value) {
-                if (value == 1) {
-                  Get.offAllNamed(TabBarApp.routeName);
-                } else if (value == 2) {
-                  Share();
-                } else if (value == 3) {
-                  RateBox(context);
-                } else if (value == 4) {
-                  FeedbackBox(context);
-                } else if (value == 5) {} else {
-                  Get.to(AboutApp());
-                }
-                controller.pageIndex.value =
-                    controller.popupMenuItemIndex.value;
-                print("Value:- $value");
-                print("Value12:- ${ controller.popupMenuItemIndex.value}");
-                print("Value14:- ${ controller.value.value}");
-                print("Value19:- ${ controller.pageIndex.value}");
-              },
-
-              itemBuilder: (context) =>
-              [
-                PopupMenuItem(
-                  child: Text(StringsUtils.history),
-                  value: 1,
-                ),
-                PopupMenuItem(
-                  child: Text(StringsUtils.shareApp),
-                  value: 2,
-                ),
-                PopupMenuItem(
-                  child: Text(StringsUtils.rateApp),
-                  value: 3,
-                ),
-                PopupMenuItem(
-                  child: Text(StringsUtils.feedback),
-                  value: 4,
-                ),
-                PopupMenuItem(
-                  child: Text(StringsUtils.termsAndPrivacy),
-                  value: 5,
-                ),
-                PopupMenuItem(
-                  child: Text(StringsUtils.aboutApp),
-                  value: 6,
-                ),
-              ],
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

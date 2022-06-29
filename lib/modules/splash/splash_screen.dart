@@ -1,9 +1,10 @@
 import 'dart:async';
+
 import 'package:direct_whatsapp/helper/exception/app_exception.dart';
-import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
+import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/feedback/feedback.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
-import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -34,14 +35,14 @@ class _SplashScreenState extends State<SplashScreen> {
   late Timer _timer;
   List<Color> _kDefaultRainbowColors = const [
     AppColors.black,
-
   ];
+
   @override
   void initState() {
     super.initState();
-    try{
-    startTimeOut();
-    }catch(e){
+    try {
+      startTimeOut();
+    } catch (e) {
       AppException.showException(e);
     }
   }
@@ -53,6 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -68,23 +70,32 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
-                Icon(
-                  Icons.whatsapp,
-                  color: AppColor.appColors,
-                  size: 90,
+              children: [
+                // Icon(
+                //   Icons.whatsapp,
+                //   color: AppColor.appColors,
+                //   size: 90,
+                // ),
+                Image.asset(
+                  "assets/image/izdhan-imran-6rCPidBczbY-unsplash.jpg",
+                  colorBlendMode: BlendMode.multiply,
+                  height: 50.h,
+                  width: 50.w,
+                  fit: BoxFit.contain,
+                  color: controller.kGreyBackground,
                 ),
                 // VerticalDivider(
                 //   width: 1.0,
                 //   color: Colors.green,
                 // ),
-                Text(
-                  StringsUtils.whatsDirects,
-                  style: TextStyle(
-                      fontSize: 28,
-                      color: AppColors.darkBlue,
-                      fontWeight: FontWeight.w700),
-                ),
+                // Text(
+                //   StringsUtils.whatsDirects,
+                //   style: TextStyle(
+                //       fontSize: 28,
+                //       fontFamily: "Customtext",
+                //       color: AppColors.darkBlue,
+                //       fontWeight: FontWeight.w700),
+                // ),
               ],
             ),
           ),
@@ -93,10 +104,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Container(
               height: 6.h,
               child: LoadingIndicator(
-                  indicatorType: Indicator.ballPulse,
-                  colors: _kDefaultRainbowColors,
-                  backgroundColor: Colors.transparent,
-                  pathBackgroundColor: Colors.purpleAccent,
+                indicatorType: Indicator.ballPulse,
+                colors: _kDefaultRainbowColors,
+                backgroundColor: Colors.transparent,
+                pathBackgroundColor: Colors.purpleAccent,
               ),
             ),
           )
@@ -108,10 +119,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void startTimeOut() {
     _timer = Timer.periodic(
       const Duration(seconds: 2),
-          (timer) {
+      (timer) {
         Get.offAllNamed(WhatsApp.routeName);
       },
     );
   }
-
 }

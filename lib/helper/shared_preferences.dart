@@ -1,10 +1,8 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SharedPrefs {
-
-  static final Future<SharedPreferences> prefsData = SharedPreferences.getInstance();
+  static final Future<SharedPreferences> prefsData =
+      SharedPreferences.getInstance();
 
   static Future<void> setNumberList(List<String> numberList) async {
     final SharedPreferences prefs = await prefsData;
@@ -16,30 +14,26 @@ class SharedPrefs {
     return prefs.getStringList("numberList") ?? [];
   }
 
-
-  static Future<void> setCountryNumberList(List<String> countryNumberList) async {
+  static Future<void> setCountryNumberList(
+      List<String> countryNumberList) async {
     final SharedPreferences prefs = await prefsData;
     await prefs.setStringList("countryNumberList", countryNumberList);
   }
-
 
   static Future<List<String>> getCountryNumberList() async {
     final SharedPreferences prefs = await prefsData;
     return prefs.getStringList("countryNumberList") ?? [];
   }
 
-
   static Future<void> setCountryNameList(List<String> countryNumberList) async {
     final SharedPreferences prefs = await prefsData;
     await prefs.setStringList("countryNameList", countryNumberList);
   }
 
-
   static Future<List<String>> getCountryNameList() async {
     final SharedPreferences prefs = await prefsData;
     return prefs.getStringList("countryNameList") ?? [];
   }
-
 
   static Future<void> setUserNameList(List<String> setUserNameList) async {
     final SharedPreferences prefs = await prefsData;
@@ -51,7 +45,6 @@ class SharedPrefs {
     return prefs.getStringList("setUserNameList") ?? [];
   }
 
-
   static Future<void> setIconList(List<String> setIconList) async {
     final SharedPreferences prefs = await prefsData;
     await prefs.setStringList("setIconList", setIconList);
@@ -61,8 +54,6 @@ class SharedPrefs {
     final SharedPreferences prefs = await prefsData;
     return prefs.getStringList("setIconList") ?? [];
   }
-
-
 
   static Future<void> setDateTimeList(List<String> dateTimeList) async {
     final SharedPreferences prefs = await prefsData;
@@ -75,21 +66,22 @@ class SharedPrefs {
   }
 
 
+  static Future<void> setDayList(List<String> dayList) async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.setStringList("dayList", dayList);
+  }
 
-  static Future<void> clear() async {
-   final SharedPreferences prefs = await prefsData;
-   await prefs.clear();
+  static Future<List<String>> getDayList() async {
+    final SharedPreferences prefs = await prefsData;
+    return prefs.getStringList("dayList") ?? [];
   }
 
 
+  static Future<void> clear() async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.clear();
+  }
 }
-
-
-
-
-
-
-
 
 // class AppSharedPreference {
 //   static final _getStorage = GetStorage();
@@ -107,6 +99,5 @@ class SharedPrefs {
 //
 //   static Future<void> clear() async => _getStorage.erase();
 // }
-
 
 //

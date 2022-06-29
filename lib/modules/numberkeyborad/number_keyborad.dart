@@ -1,3 +1,4 @@
+import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -172,7 +173,7 @@ class NumberButton extends StatelessWidget {
           child: Text(
             number.toString(),
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                fontWeight: FontWeight.bold, color: AppColors.white, fontSize: 30),
           ),
         ),
       ),

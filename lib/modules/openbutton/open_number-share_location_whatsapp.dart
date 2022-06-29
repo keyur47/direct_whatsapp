@@ -1,17 +1,21 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
-import 'package:direct_whatsapp/modules/controller/controller.dart';
+import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/appsnackbar.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/widgets/button_box.dart';
+import 'package:direct_whatsapp/widgets/custom_icons_icons.dart';
 import 'package:direct_whatsapp/widgets/datetime.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
 
-class OpenWhatsApp extends StatelessWidget {
+class OpenShareLocationWhatsAppNumber extends StatelessWidget {
+  OpenShareLocationWhatsAppNumber({Key? key}) : super(key: key);
+
   Controller controller = Get.find();
 
   @override
@@ -29,53 +33,59 @@ class OpenWhatsApp extends StatelessWidget {
               controller.nameCountryList.addAll([controller.countryName.value]);
               await SharedPrefs.setCountryNameList(controller.nameCountryList);
               print("CountryObjectName${controller.nameCountryList}");
-
-
               controller.dateTime.addAll([dateTime()]);
               await SharedPrefs.setDateTimeList(controller.dateTime);
               print("dateTime${controller.dateTime}");
+              controller.day.addAll([day()]);
+              await SharedPrefs.setDayList(controller.day);
+              print("day2${controller.day}");
 
-
-              controller.url.value =
-                  "https://wa.me/+${controller.data.value}${controller.numberController.text}?text=${controller.textController.text}";
-              await launch(controller.url.value);
-              print("------${controller.url.value}");
+              await Geolocator.requestPermission();
+              if (await Permission.location.isGranted) {
+                Position? position;
+                try {
+                  position = await Geolocator.getCurrentPosition(
+                    desiredAccuracy: LocationAccuracy.bestForNavigation,
+                    timeLimit: const Duration(seconds: 5),
+                  );
+                  var urls =
+                      "https://www.google.com/maps/?q=${position.latitude},${position.longitude}"
+                          .toString();
+                  final url =
+                      "https://wa.me/+${controller.data.value}${controller.numberController.text}?text=See my real-time location on Maps:$urls";
+                  await launch(url);
+                  print("Location$url");
+                  print("Location121$urls");
+                } catch (e) {}
+              }
             } else {
               AppSnackBar.showErrorSnackBar(
-                Icon: Icon(Icons.whatsapp, color: Colors.green, shadows: [
-                  BoxShadow(
-                    color: AppColor.appColors.withOpacity(0.8),
-                    spreadRadius: 10,
-                    blurRadius: 7,
-                    offset: const Offset(2, 1), // changes position of shadow
-                  ),
-                ]),
-                message: StringsUtils.pleaseCountryCode,
-                title: StringsUtils.openWhatsApp,
+                Icon: Icon(Icons.location_on_outlined,color: Colors.green),
+                message:  StringsUtils.pleaseCountryCode,
+                title: StringsUtils.shareLocation,
                 snackPosition: SnackPosition.BOTTOM,
               );
             }
           } else {
             AppSnackBar.showErrorSnackBar(
-              Icon: Icon(Icons.whatsapp, color: Colors.green),
-              message: StringsUtils.pleasePhoneNumber,
-              title: StringsUtils.openWhatsApp,
+              Icon: Icon(Icons.location_on_outlined,color: Colors.green),
+              message:  StringsUtils.pleasePhoneNumber,
+              title: StringsUtils.shareLocation,
               snackPosition: SnackPosition.BOTTOM,
             );
           }
         },
-        text: StringsUtils.openWhatsApp,
-        // iconData: Icons.whatsapp,
+        text: StringsUtils.shareLocation,
+        iconData: Icons.location_on_outlined,
         image: "assets/image/whatsapp.png",
-        iconData: Icons.whatsapp,
         scale: 3,
         top: 1.5.h,
         left: 1.5.h,
         right: 1.5.h,
         bottom: 1.5.h,
         ImageColor: AppColors.green,
-        textColor: AppColor.blackColor,
-        boxColor: AppColors.white,
+        boxColor: AppColor.whiteColor,
+        textColor: AppColors.black,
         iconColor: AppColors.green,
         sizeIcon: 7.w
     );

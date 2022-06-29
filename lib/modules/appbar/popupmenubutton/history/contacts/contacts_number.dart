@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
-import 'package:direct_whatsapp/modules/controller/controller.dart';
-import 'package:direct_whatsapp/modules/sms/sms.dart';
-import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
+import 'package:direct_whatsapp/modules/allscreen/messages/sms_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
+import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
-import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -32,16 +32,19 @@ class _AddListState extends State<AddList> {
     controller.countryList = await SharedPrefs.getCountryNumberList();
     controller.nameCountryList = await SharedPrefs.getCountryNameList();
     controller.dateTime = await SharedPrefs.getDateTimeList();
+    controller.day = await SharedPrefs.getDayList();
     setState(() {
       controller.numberList.join("");
       controller.countryList.join("");
       controller.nameCountryList.join("");
       controller.dateTime.join("");
+      controller.day.join("");
     });
     print("------------>>>${controller.numberList}");
     print("------------>>>${controller.countryList}");
     print("------------>>>${controller.nameCountryList}");
     print("------------>>>${controller.dateTime}");
+    print("------day------>>>${controller.day}");
   }
 
   @override
@@ -62,128 +65,126 @@ class _AddListState extends State<AddList> {
                     "assets/image/no_data.png",
                     scale: 5,
                   ))
-                : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        for (var i = 0;
-                            i < controller.numberList.length;
-                            i++) ...[
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: 5.w, right: 5.w, top: 1.h),
-                            child: Container(
-                                height: 7.h,
-                                decoration: BoxDecoration(
-                                    color: AppColor.backgroundColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(width: 1)),
-                                child: Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        showModalBottomSheet(
-                                            context: context,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.vertical(
-                                                top: Radius.circular(25.0),
-                                              ),
+                : Padding(padding: EdgeInsets.only(left: 3.w, right: 3.w, top: 1.h),
+                  child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: controller.numberList.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            SwipeActionCell(
+                              key: ObjectKey(
+                                controller.numberList[index],
+                              ),
+                              trailingActions: <SwipeAction>[
+                                SwipeAction(
+                                    icon: Icon(Icons.delete, color: Colors.red),
+                                    onTap: (CompletionHandler handler) async {
+                                      controller.numberList.removeAt(index);
+                                      await SharedPrefs.clear();
+                                      setState(() {});
+                                      // controller.numberList[index] = SharedPrefs.clear();
+                                    },
+                                    color: Colors.transparent),
+                              ],
+                              child: Container(
+                                  height: 7.h,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.backgroundColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(width: 1)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                          context: context,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(25.0),
                                             ),
-                                            builder: (context) {
-                                              return SizedBox(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 0.5.h),
-                                                        child: ListTile(
-                                                          leading: Icon(
-                                                              Icons.whatsapp),
-                                                          title:
-                                                              GestureDetector(
-                                                                  onTap: () {
-                                                                    controller
-                                                                        .numberController
-                                                                        .text = controller
-                                                                            .numberList[
-                                                                        i];
-                                                                    // controller
-                                                                    //         .data
-                                                                    //         .value =
-                                                                    //     controller
-                                                                    //         .countryList[i];
-                                                                    Get.to(
-                                                                        WhatsApp());
-                                                                  },
-                                                                  child: Text(
-                                                                      "WhatsApp")),
-                                                        ),
+                                          ),
+                                          builder: (context) {
+                                            return SizedBox(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  Container(
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 0.5.h),
+                                                      child: ListTile(
+                                                        leading:
+                                                            Icon(Icons.whatsapp),
+                                                        title: GestureDetector(
+                                                            onTap: () {
+                                                              controller
+                                                                  .numberController
+                                                                  .text = controller
+                                                                      .numberList[
+                                                                  index];
+                                                              controller.data
+                                                                  .value = controller
+                                                                      .countryList[
+                                                                  index];
+                                                              Get.to(WhatsApp());
+                                                            },
+                                                            child:
+                                                                Text("WhatsApp")),
                                                       ),
                                                     ),
-                                                    Container(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                bottom: 0.5.h),
-                                                        child: ListTile(
-                                                          leading: Icon(
-                                                              Icons.message),
-                                                          title:
-                                                              GestureDetector(
-                                                                  onTap: () {
-                                                                    controller
-                                                                        .smsNumberController
-                                                                        .text = controller
-                                                                            .numberList[
-                                                                        i];
-                                                                    controller
-                                                                            .data
-                                                                            .value =
-                                                                        controller
-                                                                            .countryList[i];
-                                                                    Get.to(
-                                                                        SmsNumber());
-                                                                  },
-                                                                  child: Text(
-                                                                      "Messages")),
-                                                        ),
+                                                  ),
+                                                  Container(
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          bottom: 0.5.h),
+                                                      child: ListTile(
+                                                        leading:
+                                                            Icon(Icons.message),
+                                                        title: GestureDetector(
+                                                            onTap: () {
+                                                              controller
+                                                                  .smsNumberController
+                                                                  .text = controller
+                                                                      .numberList[
+                                                                  index];
+                                                              controller.data
+                                                                  .value = controller
+                                                                      .countryList[
+                                                                  index];
+                                                              Get.to(SmsNumber());
+                                                            },
+                                                            child:
+                                                                Text("Messages")),
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
-                                              );
-                                            });
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 2.w, top: 0.h),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                              Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                                              child: Text(
-                                                "+${controller.countryList[i]}",
-                                                style: TextStyle(
-                                                    color: AppColors.white,
-                                                    fontSize: 12),
+                                                  ),
+                                                ],
                                               ),
+                                            );
+                                          });
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 2.w, right: 2.w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor: Colors.primaries[
+                                                Random().nextInt(
+                                                    Colors.primaries.length)],
+                                            child: Text(
+                                              "+${controller.countryList[index]}",
+                                              style: TextStyle(
+                                                  color: AppColors.white,
+                                                  fontSize: 12),
                                             ),
-                                            Padding(
+                                          ),
+                                          Expanded(
+                                            child: Padding(
                                               padding: EdgeInsets.only(
                                                   top: 1.2.h, left: 2.w),
                                               child: Column(
@@ -191,39 +192,57 @@ class _AddListState extends State<AddList> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      "${controller.numberList[i]}",
+                                                      "${controller.numberList[index]}",
                                                       style: TextStyle(
-                                                          color:
-                                                              AppColors.black,
+                                                          color: AppColors.black,
                                                           fontSize: 16)),
                                                   Row(
                                                     children: [
-                                                      Icon(BootstrapIcons.arrow_up_right,size: 12,),
+                                                      Icon(
+                                                        BootstrapIcons
+                                                            .arrow_up_right,
+                                                        size: 12,
+                                                      ),
                                                       Text(
-                                                          " ${controller.nameCountryList[i].toString()}",
+                                                          " ${controller.nameCountryList[index].toString()}",
                                                           style: TextStyle(
                                                               color: AppColors.red,
                                                               fontSize: 14)),
                                                       Text(" \u2022 "),
-                                                      Text("${controller.dateTime[i]}")
-
+                                                      Text(
+                                                        "${(controller.dateTime[index])}",
+                                                        style:
+                                                            TextStyle(fontSize: 13),
+                                                      )
                                                     ],
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text("${controller.day[index]}"),
+                                              SizedBox(
+                                                width: 1.w,
+                                              ),
+                                              Icon(
+                                                Icons.info_outline,
+                                                size: 6.w,
+                                              ),
+                                            ],
+                                          )
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                )),
-                          ),
-                          SizedBox(height: 0.5.h)
-                        ],
-                      ],
+                                  )),
+                            ),
+                            SizedBox(height: 1.h,)
+                          ],
+                        );
+                      },
                     ),
-                  ),
+                ),
           ],
         ),
       ),
@@ -237,7 +256,7 @@ class _AddListState extends State<AddList> {
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:whatsdirect/modules/controller/controller.dart';
+// import 'package:whatsdirect/modules/controller/all_screen_controller.dart';
 // import 'package:whatsdirect/widgets/model.dart';
 //
 // class AddList extends StatefulWidget {

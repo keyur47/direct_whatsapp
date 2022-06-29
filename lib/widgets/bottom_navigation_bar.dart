@@ -1,7 +1,7 @@
 // import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-// import 'package:direct_whatsapp/modules/whatsapp/whatsapp.dart';
-// import 'package:direct_whatsapp/modules/instagram/instagram,dart.dart';
-// import 'package:direct_whatsapp/modules/sms/sms.dart';
+// import 'package:direct_whatsapp/modules/whatsapp/whatsapp_screen.dart';
+// import 'package:direct_whatsapp/modules/instagram/instagram_screen.dart';
+// import 'package:direct_whatsapp/modules/sms/open_number_sms.dart';
 // import 'package:direct_whatsapp/modules/telegram/telegram_screen.dart';
 // import 'package:direct_whatsapp/utils/app_color.dart';
 // import 'package:flutter/material.dart';

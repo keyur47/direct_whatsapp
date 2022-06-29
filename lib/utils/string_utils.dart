@@ -15,12 +15,16 @@ class StringsUtils {
   static const String Messages = 'Messages';
   static const String userNameHistory = 'UserName History';
   static const String history = 'History';
-  static const String userName = 'UserName';
+  static const String userName = 'Username';
   static const String whatsDirect = 'WhatsDirect';
   static const String whatsDirects = 'Direct WhatsApp';
   static const String telegramDirects = 'Direct Telegram';
   static const String instagramDirects = 'Direct Instagram';
   static const String smsDirects = 'Direct Messages';
+  static const String whatsApp = 'WhatsApp';
+  static const String telegram = 'Telegram';
+  static const String instagram = 'Instagram';
+  static const String sms = 'Messages';
   static const String contacts = 'Contacts';
   static const String contactsHistory = 'Contacts History';
   static const String shareApp = 'Share App';

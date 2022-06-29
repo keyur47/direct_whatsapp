@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
-
   TextEditingController numberController = TextEditingController();
   TextEditingController smsNumberController = TextEditingController();
   TextEditingController textController = TextEditingController();
   TextEditingController smsTextController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController telegramUsernameController = TextEditingController();
+  TextEditingController instagramUsernameController = TextEditingController();
   TextEditingController emailFeedBackController = TextEditingController();
   TextEditingController FeedBackController = TextEditingController();
   PageController pageController = PageController();
   FocusNode emailFocusNode = FocusNode();
+  final kGreyBackground = Colors.transparent;
   FocusNode passwordFocusNode = FocusNode();
   FocusNode confirmFocusNode = FocusNode();
   List<String> numberList = [];
@@ -21,6 +22,7 @@ class Controller extends GetxController {
   List<String> nameCountryList = [];
   List<String> nameTelegramList = [];
   List<String> dateTime = [];
+  List<String> day = [];
   RxBool isOpenKeyboard  = false.obs;
   RxBool Icon = false.obs;
   RxString url = ''.obs;

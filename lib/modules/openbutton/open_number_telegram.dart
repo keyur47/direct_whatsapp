@@ -1,16 +1,17 @@
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
-import 'package:direct_whatsapp/modules/controller/controller.dart';
+import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/appsnackbar.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/widgets/button_box.dart';
+import 'package:direct_whatsapp/widgets/datetime.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OpenTelegram extends StatelessWidget {
-  OpenTelegram({Key? key}) : super(key: key);
+class OpenTelegramNumber extends StatelessWidget {
+  OpenTelegramNumber({Key? key}) : super(key: key);
   Controller controller = Get.find();
 
   @override
@@ -28,6 +29,9 @@ class OpenTelegram extends StatelessWidget {
             controller.nameCountryList.addAll([controller.countryName.value]);
             await SharedPrefs.setCountryNameList(controller.nameCountryList);
             print("CountryObjectName${controller.nameCountryList}");
+            controller.dateTime.addAll([dateTime()]);
+            await SharedPrefs.setDateTimeList(controller.dateTime);
+            print("dateTime${controller.dateTime}");
             controller.url.value =
                 "https://telegram.me/+${controller.data.value}${controller.numberController.text}";
             await launch(controller.url.value);
