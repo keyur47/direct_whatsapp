@@ -51,7 +51,7 @@ Future FeedbackBox(context) {
                         onTap: () {},
                         maxLines: 1,
                         color: AppColor.backgroundColor,
-                        textStyle: TextStyle(color: AppColors.grey, fontSize: 14),
+                        textStyle: TextStyle(color: AppColors.grey, fontSize: 14,fontFamily: "Customtext"),
                         style:
                             const TextStyle(fontSize: 16, color: AppColors.black),
                         cursorColor: Colors.black,
@@ -81,7 +81,7 @@ Future FeedbackBox(context) {
                   onTap: () {},
                   maxLines: 4,
                   color: AppColor.backgroundColor,
-                  textStyle: TextStyle(color: AppColors.grey, fontSize: 14),
+                  textStyle: TextStyle(color: AppColors.grey, fontSize: 14,fontFamily: "Customtext"),
                   style: const TextStyle(fontSize: 16, color: AppColors.black),
                   cursorColor: Colors.black,
 
@@ -95,52 +95,59 @@ Future FeedbackBox(context) {
               Padding(
                 padding: EdgeInsets.only(right: 5.w, left: 5.w, top: 5.h),
                 child: ReviewSlider(
-                    optionStyle: TextStyle(color: AppColors.darkBlue),
+                    optionStyle: TextStyle(color: AppColors.darkBlue,fontFamily: "Customtext"),
                     onChange: (int value) {
                       print(value);
                     }),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 5.h,left: 28.w,right: 28.w),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: AppColors.darkBlue, // Background color
-                  ),
-                  onPressed: () async {
-                    if (controller.emailFeedBackController.text.isNotEmpty &&
-                        controller.FeedBackController.text.isNotEmpty) {
-                      controller.validateEmail(
-                          controller.emailFeedBackController.text);
-                      await controller.emailFeedBackController.text;
-                      await controller.FeedBackController.text;
-                      var feedEmail = controller.emailFeedBackController.text;
-                      var feed = controller.FeedBackController.text;
-                      print("feedEmail:-$feedEmail");
-                      print("feed:-$feed");
-                      Get.back();
-                      controller.emailFeedBackController.clear();
-                      controller.FeedBackController.clear();
-                    } else {
-                      AppSnackBar.showErrorSnackBar(
-                        Icon: Icon(Icons.feedback,
-                            color: AppColor.backgroundColor),
-                        message: StringsUtils.pleaseEmail,
-                        title: StringsUtils.sendFeedBack,
-                        snackPosition: SnackPosition.TOP,
-                      );
-                    }
-                  },
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Icon(Icons.send,color: AppColor.backgroundColor,),
-                        SizedBox(width: 1.w,),
-                        Text(
-                          StringsUtils.sendFeedBack,
-                          style: TextStyle(color: AppColor.backgroundColor),
+                padding: EdgeInsets.only(top: 5.h,),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColors.darkBlue, // Background color
                         ),
-                      ],
-                    ),
+                        onPressed: () async {
+                          if (controller.emailFeedBackController.text.isNotEmpty &&
+                              controller.FeedBackController.text.isNotEmpty) {
+                            controller.validateEmail(
+                                controller.emailFeedBackController.text);
+                            await controller.emailFeedBackController.text;
+                            await controller.FeedBackController.text;
+                            var feedEmail = controller.emailFeedBackController.text;
+                            var feed = controller.FeedBackController.text;
+                            print("feedEmail:-$feedEmail");
+                            print("feed:-$feed");
+                            Get.back();
+                            controller.emailFeedBackController.clear();
+                            controller.FeedBackController.clear();
+                          } else {
+                            AppSnackBar.showErrorSnackBar(
+                              Icon: Icon(Icons.feedback,
+                                  color: AppColor.backgroundColor),
+                              message: StringsUtils.pleaseEmail,
+                              title: StringsUtils.sendFeedBack,
+                              snackPosition: SnackPosition.TOP,
+                            );
+                          }
+                        },
+                        child: Center(
+                          child: Row(
+                            children: [
+                              Icon(Icons.send,color: AppColor.backgroundColor,),
+                              SizedBox(width: 1.w,),
+                              Text(
+                                StringsUtils.sendFeedBack,
+                                style: TextStyle(color: AppColor.backgroundColor,fontFamily: "Customtext"),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )

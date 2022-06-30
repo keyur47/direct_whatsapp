@@ -66,6 +66,16 @@ class SharedPrefs {
   }
 
 
+  static Future<void> setTypeList(List<String> dateTypeList) async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.setStringList("type", dateTypeList);
+  }
+
+  static Future<List<String>> getTypeList() async {
+    final SharedPreferences prefs = await prefsData;
+    return prefs.getStringList("type") ?? [];
+  }
+
   static Future<void> setDayList(List<String> dayList) async {
     final SharedPreferences prefs = await prefsData;
     await prefs.setStringList("dayList", dayList);
@@ -75,6 +85,16 @@ class SharedPrefs {
     final SharedPreferences prefs = await prefsData;
     return prefs.getStringList("dayList") ?? [];
   }
+
+  static Future<void> remove() async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.remove("numberList");
+  }
+
+  // static Future<void> setList(List<String> value) async {
+  //   final SharedPreferences prefs = await prefsData;
+  //   await prefs.setStringList("numberList",value);
+  // }
 
 
   static Future<void> clear() async {

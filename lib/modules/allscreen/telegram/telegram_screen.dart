@@ -56,7 +56,7 @@ class _TelegramState extends State<Telegram> {
             ),
           ),
           SizedBox(
-            height: 1.5.h,
+            height: 2.5.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -53,13 +53,13 @@ class OpenTelegramNumber extends StatelessWidget {
           );
         }
       },
-      text: StringsUtils.openTelegram,
+      text: StringsUtils.telegram,
       iconData: Icons.telegram_outlined,
       image: "assets/image/telegram.png",
       scale: 3,
       top: 1.5.h,
       left: 1.5.h,
-      right: 1.5.h,
+      right: 1.h,
       bottom: 1.5.h,
       boxColor: AppColors.white,
       textColor: AppColors.black,

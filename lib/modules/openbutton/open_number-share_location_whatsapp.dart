@@ -79,14 +79,14 @@ class OpenShareLocationWhatsAppNumber extends StatelessWidget {
         iconData: Icons.location_on_outlined,
         image: "assets/image/whatsapp.png",
         scale: 3,
-        top: 1.5.h,
-        left: 1.5.h,
-        right: 1.5.h,
-        bottom: 1.5.h,
+        top: 1.1.h,
+        left: 0.8.h,
+        right: 0.8.h,
+        bottom: 1.1.h,
         ImageColor: AppColors.green,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: AppColors.green,
+        iconColor: Color(0xFF28D146),
         sizeIcon: 7.w
     );
   }

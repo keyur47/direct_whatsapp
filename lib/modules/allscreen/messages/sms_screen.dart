@@ -99,7 +99,7 @@ class _SmsNumberState extends State<SmsNumber> {
                           textStyle:
                               TextStyle(color: AppColors.grey, fontSize: 14),
                           style: const TextStyle(
-                              fontSize: 16, color: AppColors.grey),
+                              fontSize: 16, color: AppColors.grey,fontFamily: "Customtext"),
                           cursorColor: Colors.black),
                     ],
                   ),

@@ -39,17 +39,23 @@ class OpenUserNameTelegram extends StatelessWidget {
             );
           }
         },
-        text: StringsUtils.userNameTelegram,
+        text: StringsUtils.telegram,
         iconData: Icons.telegram_outlined,
         image: "assets/image/telegram.png",
         scale: 3,
-        top: 1.5.h,
-        left: 1.5.h,
-        right: 1.5.h,
-        bottom: 1.5.h,
+        top: 1.1.h,
+        left: 1.1.h,
+        right: 1.1.h,
+        bottom: 1.1.h,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
         iconColor: Colors.blue,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.white, Colors.white]),
+        ),
         sizeIcon: 7.w);
   }
 }

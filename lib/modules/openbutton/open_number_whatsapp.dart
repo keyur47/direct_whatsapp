@@ -22,6 +22,9 @@ class OpenWhatsAppNumber extends StatelessWidget {
               controller.numberList.addAll([controller.numberController.text]);
               await SharedPrefs.setNumberList(controller.numberList);
               print("object${controller.numberList}");
+              // controller.numberList.addAll([controller.numberController.text]);
+              // await SharedPrefs.setList(controller.numberList);
+              // print("setListsetList:-${controller.numberList}");
               controller.countryList.addAll([controller.data.value]);
               await SharedPrefs.setCountryNumberList(controller.countryList);
               print("CountryObject${controller.countryList}");
@@ -34,6 +37,9 @@ class OpenWhatsAppNumber extends StatelessWidget {
               await SharedPrefs.setDayList(controller.day);
               print("day2${controller.day}");
               print("dateTime${controller.dateTime}");
+              controller.type.addAll(["WhatsApp"]);
+              await SharedPrefs.setTypeList(controller.type);
+              print("Type1222${controller.type}");
               controller.url.value =
                   "https://wa.me/+${controller.data.value}${controller.numberController.text}?text=${controller.textController.text}";
               await launch(controller.url.value);
@@ -64,18 +70,18 @@ class OpenWhatsAppNumber extends StatelessWidget {
         },
         text: StringsUtils.openWhatsApp,
         // iconData: Icons.whatsapp,
-        image: "assets/image/whatsapp.png",
+        //image: "assets/image/whatsapp.png",
         iconData: Icons.whatsapp,
         scale: 3,
-        top: 1.5.h,
-        left: 1.5.h,
-        right: 1.5.h,
-        bottom: 1.5.h,
+        top: 1.1.h,
+        left: 1.2.h,
+        right: 0.7.h,
+        bottom: 1.1.h,
         ImageColor: AppColors.green,
         textColor: AppColor.blackColor,
         boxColor: AppColors.white,
-        iconColor: AppColors.green,
-        sizeIcon: 7.w
+        iconColor: Color(0xFF28D146),
+        sizeIcon: 7.w,
     );
   }
 }

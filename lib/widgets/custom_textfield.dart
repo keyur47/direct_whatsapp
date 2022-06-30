@@ -19,7 +19,15 @@ Widget phoneNumberTextField({
 }) {
   return Container(
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.h), color: Colors.white),
+        borderRadius: BorderRadius.circular(5.h),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(4, 8), // Shadow position
+          ),
+        ]),
     child: IntlPhoneField(
       onTap: onTapV,
       disableLengthCheck: true,
@@ -35,7 +43,7 @@ Widget phoneNumberTextField({
       ),
       onCountryChanged: valueChanged,
       initialCountryCode: "IN",
-      dropdownTextStyle: const TextStyle(color: AppColors.grey, fontSize: 16),
+      dropdownTextStyle: const TextStyle(color: AppColors.grey, fontSize: 14),
       showDropdownIcon: true,
       showCountryFlag: false,
       invalidNumberMessage: "",
@@ -46,11 +54,11 @@ Widget phoneNumberTextField({
             onTap: onTap,
             child: const Icon(
               Icons.history,
-              color: AppColors.green,
+              color: AppColor.whatsAppColor,
             )),
         border: InputBorder.none,
         hintText: hintText,
-        hintStyle: const TextStyle(color: AppColors.grey),
+        hintStyle: const TextStyle(color: AppColors.grey,fontFamily: "Customtext",fontSize: 15),
       ),
       controller: controller,
       showCursor: showCursor,
@@ -61,10 +69,6 @@ Widget phoneNumberTextField({
   );
 }
 
-
-
-
-
 Widget usernameTextField({
   required TextEditingController? controller,
   required bool? showCursor,
@@ -72,57 +76,74 @@ Widget usernameTextField({
   required TextInputType textInputType,
   required GestureTapCallback onTap,
 }) {
-  return Container(
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.h), color: Colors.white),
-    child: TextFormField(
-      controller: controller,
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter(RegExp(r'[a-z_.0-9]'), allow: true)        ],
-      decoration: InputDecoration(
-        enabled: true,
-        contentPadding: EdgeInsets.only(top: 1.7.h),
-        border: InputBorder.none,
-        prefixIcon: Icon(Icons.search),
-        suffixIcon: GestureDetector(
-            onTap: onTap,
-            child: Icon(Icons.close)),
-        hintText: hintText
-      )
+  return GestureDetector(
+    child: Container(
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 4,
+          offset: Offset(4, 8), // Shadow position
+        ),
+      ], borderRadius: BorderRadius.circular(5.h), color: Colors.white),
+      child: TextFormField(
+          controller: controller,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter(RegExp(r'[a-z_.0-9]'), allow: true)
+          ],
+          decoration: InputDecoration(
+              enabled: true,
+              contentPadding: EdgeInsets.only(top: 1.7.h),
+              border: InputBorder.none,
+              prefixIcon: Icon(Icons.search),
+              suffixIcon: GestureDetector(onTap: onTap, child: Icon(Icons.close)),
+              hintText: hintText,
+              hintStyle: TextStyle(fontFamily: "Customtext",fontSize: 16)
+          )),
     ),
   );
 }
 
-
-
-
 Controller controller = Get.find();
+
 ///
-Widget textField({required TextEditingController? controller,required int maxLines,required Color color,required TextStyle textStyle,required TextStyle style,
+Widget textField(
+    {required TextEditingController? controller,
+    required int maxLines,
+    required Color color,
+    required TextStyle textStyle,
+    required TextStyle style,
     //bool? showCursor,
     required FocusNode? focusNode,
-    required String? hintText,required Color cursorColor,
+    required String? hintText,
+    required Color cursorColor,
     required TextInputType textInputType,
-  required BoxBorder? boxBorder,
-  ValueChanged<String>? valueChanged,
-  FormFieldValidator<String>? validator,
-  Widget? suffixIcon,
+    required BoxBorder? boxBorder,
+    ValueChanged<String>? valueChanged,
+    FormFieldValidator<String>? validator,
+    Widget? suffixIcon,
     required VoidCallback onTap}) {
   return Container(
     decoration: BoxDecoration(
-      border: boxBorder,
-        color: color, borderRadius: BorderRadius.circular(2.w)),
+        border: boxBorder,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(4, 8), // Shadow position
+          ),
+        ],
+        color: color,
+        borderRadius: BorderRadius.circular(2.w)),
     child: Padding(
       padding: EdgeInsets.only(left: 2.w),
       child: TextFormField(
         onTap: onTap,
         maxLines: maxLines,
         decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hintText,
-          hintStyle: textStyle,
-          suffixIcon: suffixIcon
-        ),
+            border: InputBorder.none,
+            hintText: hintText,
+            hintStyle: textStyle,
+            suffixIcon: suffixIcon),
         controller: controller,
         onChanged: valueChanged,
         // showCursor: showCursor,

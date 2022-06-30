@@ -66,13 +66,13 @@ class _InstagramState extends State<Instagram> {
                         hintText: StringsUtils.username,
                         textInputType: TextInputType.none,
                         onTap: () async {
-                          controller.telegramUsernameController.clear();
+                          controller.instagramUsernameController.clear();
                         }),
                   ],
                 ),
               ),
               SizedBox(
-                height: 1.5.h,
+                height: 2.5.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

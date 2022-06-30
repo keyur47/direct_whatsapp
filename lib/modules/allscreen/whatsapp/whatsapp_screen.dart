@@ -29,14 +29,6 @@ class _WhatsAppState extends State<WhatsApp> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          // Image.asset(
-          //   "assets/image/izdhan-imran-6rCPidBczbY-unsplash.jpg",
-          //   colorBlendMode: BlendMode.multiply,
-          //   height: 100.h,
-          //   width: 100.w,
-          //   fit: BoxFit.cover,
-          //   color: controller.kGreyBackground,
-          // ),
           Obx(
                   () => Container(
                     child: SingleChildScrollView(
@@ -109,7 +101,7 @@ class _WhatsAppState extends State<WhatsApp> {
                                     maxLines: 7,
                                     color: AppColor.whiteColor,
                                     textStyle:
-                                        TextStyle(color: AppColors.grey, fontSize: 14),
+                                        TextStyle(color: AppColors.grey, fontSize: 16,fontFamily: "Customtext"),
                                     style: const TextStyle(
                                         fontSize: 16, color: AppColors.grey),
                                     cursorColor: Colors.black),
@@ -124,17 +116,14 @@ class _WhatsAppState extends State<WhatsApp> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
-                                  width: 4.w,
-                                ),
                                 OpenWhatsAppNumber(),
                                 SizedBox(
-                                  width: 4.w,
+                                  width: 2.w,
                                 ),
                                  OpenShareLocationWhatsAppNumber(),
-                                SizedBox(
-                                  width: 4.w,
-                                ),
+                                // SizedBox(
+                                //   width: 4.w,
+                                // ),
                               ],
                             ),
                           ),

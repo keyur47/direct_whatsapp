@@ -21,14 +21,12 @@ class OpenUserNameInstagram extends StatelessWidget {
         onTap: () async {
           if (controller
               .instagramUsernameController.text.isNotEmpty) {
-            controller.nameTelegramList.addAll(
-                [controller.instagramUsernameController.text]);
-            await SharedPrefs.setUserNameList(
-                controller.nameTelegramList);
+            controller.nameTelegramList.addAll([controller.instagramUsernameController.text]);
+            await SharedPrefs.setUserNameList(controller.nameTelegramList);
             print("object${controller.numberList}");
             controller.dateTime.addAll([dateTime()]);
             await SharedPrefs.setDateTimeList(controller.dateTime);
-            print("dateTime${controller.dateTime}");
+            print("dateTimeinstagram${controller.dateTime}");
             controller.url.value = "instagram://user?username=${controller.instagramUsernameController.text}";
             // controller.url.value = "https://www.instagram.com/${controller.textController.text}/";
             await launch(controller.url.value);
@@ -42,17 +40,34 @@ class OpenUserNameInstagram extends StatelessWidget {
             );
           }
         },
-        text: StringsUtils.userNameInstagram,
+        text: StringsUtils.instagram,
         iconData: CustomIcons.instagram,
         image: "assets/image/whatsapp.png",
         scale: 3,
-        top: 1.5.h,
+        top: 1.1.h,
         left: 1.5.h,
-        right: 1.5.h,
-        bottom: 1.5.h,
+        right: 1.h,
+        bottom: 1.1.h,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: Colors.deepOrangeAccent);
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomRight,colors: [
+              Color(0xFF405DE6),
+              Color(0xFF5851DB),
+              Color(0xFF833AB4),
+              Color(0xFFC13584),
+              Color(0xFFE1306C),
+              Color(0xFFFD1D1D),
+              Color(0xFFF56040),
+              Color(0xFFF77737),
+              Color(0xFFFCAF45),
+              Color(0xFFFFDC80),
+            ]),
+            borderRadius: BorderRadius.circular(5)
+        ),
+        iconColor: Colors.white);
   }
 }
 

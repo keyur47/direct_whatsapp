@@ -1,32 +1,83 @@
-import 'package:direct_whatsapp/utils/app_color.dart';
-import 'package:direct_whatsapp/utils/string_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-
-class AboutApp extends StatelessWidget {
-  const AboutApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.darkBlue,
-        title: Text(StringsUtils.aboutApp),
-      ),
-      body: Padding(
-        padding:  EdgeInsets.only(left: 10.w,right: 10.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2)
-                ),
-                child: Image.asset("assets/image/private.jpg"))
-          ],
-        ),
-      ),
-    );
-  }
-}
+// import 'dart:async';
+// import 'dart:io';
+//
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:path/path.dart' as p;
+// import 'package:snapchat/snapchat.dart';
+//
+//
+// class snapchat extends StatefulWidget {
+//   @override
+//   _snapchatState createState() => _snapchatState();
+// }
+//
+// class _snapchatState extends State<snapchat> {
+//   SnapchatPlugin snapchat;
+//   SnapchatUser user;
+//
+//   String stickerPath;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     snapchat = SnapchatPlugin();
+//     initSnapchat();
+//   }
+//
+//   Future<void> initSnapchat() async {
+//     // Load asset to local file
+//     var d = await getTemporaryDirectory();
+//     stickerPath = p.join(d.path, "example_sticker.png");
+//     ByteData data = await rootBundle.load("assets/example_sticker.png");
+//     List<int> bytes =
+//     data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+//     await File(stickerPath).writeAsBytes(bytes);
+//
+//     // Init snapchat plugin
+//     await snapchat.init();
+//     SnapchatUser res = await snapchat.login();
+//     setState(() {
+//       user = res;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Plugin example app'),
+//         ),
+//         body: user == null
+//             ? Center(child: Text("User not loaded"))
+//             : Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             Center(
+//               child: CircleAvatar(
+//                 child: Image.network(user.bitmoji),
+//               ),
+//             ),
+//             Center(
+//               child: Text('User: ${user.displayName}\n${user.id}'),
+//             ),
+//           ],
+//         ),
+//         floatingActionButton: FloatingActionButton(onPressed: () async {
+//           await snapchat.send(
+//             SnapMediaType.Live,
+//             sticker: SnapchatSticker(
+//               stickerPath,
+//               x: 0.5,
+//               y: 0.5,
+//               rotation: 30,
+//             ),
+//             attachment: "https://google.com",
+//           );
+//         }),
+//       ),
+//     );
+//   }
+// }

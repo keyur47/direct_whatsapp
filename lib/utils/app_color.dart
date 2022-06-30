@@ -82,4 +82,6 @@ class AppColor {
   static const textColor = Color(0xff242821);
   static const blackColor = Colors.black;
   static const backgroundColor = Color(0XffEFEFFF);
+  static const whatsAppColor = Color(0xFF28D146);
+
 }

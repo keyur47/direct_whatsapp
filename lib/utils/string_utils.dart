@@ -33,7 +33,7 @@ class StringsUtils {
   static const String aboutApp = 'About App';
   static const String termsAndPrivacy = "Terms and Privacy";
   static const String feedBackMessages = "Top a star to rate it on the \n App Store.";
-  static const String feedBackTitle = "Enjoying Direct WhatsApp";
+  static const String feedBackTitle = "Enjoying Direct All app";
   static const String feedBackButtonNotNow = "Not Now";
   static const String pleasePhoneNumber = "Please Enter Phone Number";
   static const String pleaseCountryCode = "Please Enter Country Code";

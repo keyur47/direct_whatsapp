@@ -1,35 +1,32 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:direct_whatsapp/modules/appbar/appbar_controller.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/about/about_app.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/feedback/feedback.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/rate/rate.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/share/shareapp.dart';
 import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/messages/sms_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
+import 'package:direct_whatsapp/modules/appbar/appbar_controller.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/feedback/feedback.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/rate/rate.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/share/shareapp.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
-import 'package:fade_out_particle/fade_out_particle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class customAppbar extends StatelessWidget {
-  customAppbar({
-    required this.text,
-    required this.icon,
-    required this.iconColor,
-    required this.iconColors,
-    required this.gradient,
-    required this.left,
-    required this.right,
-    required this.bottom,
-    required this.top,
-    required this.size
-  });
+  customAppbar(
+      {required this.text,
+      required this.icon,
+      required this.iconColor,
+      required this.iconColors,
+      required this.gradient,
+      required this.left,
+      required this.right,
+      required this.bottom,
+      required this.top,
+      required this.size});
 
   String text;
   IconData icon;
@@ -41,7 +38,6 @@ class customAppbar extends StatelessWidget {
   double right;
   double left;
   double size;
-
 
   List data = [
     "${StringsUtils.whatsDirects}",
@@ -73,6 +69,13 @@ class customAppbar extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 3,
+                              offset: Offset(4, 6), // Shadow position
+                            ),
+                          ],
                           borderRadius: BorderRadius.circular(10),
                           gradient: gradient),
                       child: Padding(
@@ -97,21 +100,24 @@ class customAppbar extends StatelessWidget {
                     SizedBox(
                       width: 2.w,
                     ),
-                    DefaultTextStyle(
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontFamily: 'Customtext',
-                        color: AppColors.darkBlue
-                      ),
-                      child: Obx(()=>
-                          AnimatedTextKit(
-                          pause: Duration(milliseconds: 100),
-                          animatedTexts: [
-                            WavyAnimatedText('${data[controller.pageIndex.value]}'),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // DefaultTextStyle(
+                    //   style: const TextStyle(
+                    //       fontSize: 18.0,
+                    //       fontFamily: 'Customtext',
+                    //       color: AppColors.darkBlue),
+                    //   child: Obx(
+                    //     () => AnimatedTextKit(
+                    //       pause: Duration(milliseconds: 100),
+                    //       animatedTexts: [
+                    //         WavyAnimatedText(
+                    //             '${data[controller.pageIndex.value]}'),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+                    Text("${data[controller.pageIndex.value]}",style: TextStyle(fontSize: 18,
+                        fontFamily: "Customtext",
+                        color:   AppColors.darkBlue,),),
                     PopupMenuButton(
                       elevation: 20,
 
@@ -126,13 +132,12 @@ class customAppbar extends StatelessWidget {
                       //   glowingDuration: Duration(seconds: 1),
                       // ),
 
-                      child:
-                          Icon(Icons.keyboard_arrow_down_sharp),
-                          // Text("${data[controller.pageIndex.value]}",style: TextStyle(
-                          // fontSize: 18,
-                          // fontFamily: "Customtext",
-                          // color:   AppColors.darkBlue,
-                          // fontWeight: FontWeight.w700))
+                      child: Icon(Icons.keyboard_arrow_down_sharp),
+                      // Text("${data[controller.pageIndex.value]}",style: TextStyle(
+                      // fontSize: 18,
+                      // fontFamily: "Customtext",
+                      // color:   AppColors.darkBlue,
+                      // fontWeight: FontWeight.w700))
 
                       onSelected: (int value) {
                         controller.popupMenuItemIndex.value = value;
@@ -149,36 +154,54 @@ class customAppbar extends StatelessWidget {
                         controller.pageIndex.value =
                             controller.popupMenuItemIndex.value;
                         print("Value:- $value");
-                        print("Value12:- ${ controller.popupMenuItemIndex.value}");
-                        print("Value14:- ${ controller.value.value}");
-                        print("Value19:- ${ controller.pageIndex.value}");
+                        print(
+                            "Value12:- ${controller.popupMenuItemIndex.value}");
+                        print("Value14:- ${controller.value.value}");
+                        print("Value19:- ${controller.pageIndex.value}");
                       },
                       itemBuilder: (context) => [
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(child: Text(StringsUtils.whatsApp,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue),)),
+                          child: Center(
+                              child: Text(
+                            StringsUtils.whatsApp,
+                            style: TextStyle(
+                                fontFamily: "Customtext",
+                                color: AppColors.darkBlue),
+                          )),
                           value: 1,
                         ),
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(child: Text(StringsUtils.instagram,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue))),
+                          child: Center(
+                              child: Text(StringsUtils.instagram,
+                                  style: TextStyle(
+                                      fontFamily: "Customtext",
+                                      color: AppColors.darkBlue))),
                           value: 2,
                         ),
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(child: Text(StringsUtils.telegram,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue))),
+                          child: Center(
+                              child: Text(StringsUtils.telegram,
+                                  style: TextStyle(
+                                      fontFamily: "Customtext",
+                                      color: AppColors.darkBlue))),
                           value: 3,
                         ),
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(child: Text(StringsUtils.sms,style: TextStyle(fontFamily: "Customtext",color: AppColors.darkBlue))),
+                          child: Center(
+                              child: Text(StringsUtils.sms,
+                                  style: TextStyle(
+                                      fontFamily: "Customtext",
+                                      color: AppColors.darkBlue))),
                           value: 4,
                         ),
                       ],
                     ),
                   ],
                 ),
-
                 PopupMenuButton(
                   onSelected: (int value) {
                     if (value == 1) {
@@ -189,19 +212,18 @@ class customAppbar extends StatelessWidget {
                       RateBox(context);
                     } else if (value == 4) {
                       FeedbackBox(context);
-                    } else if (value == 5) {} else {
-                      Get.to(AboutApp());
+                    } else if (value == 5) {
+                    } else {
+                      // Get.to(AboutApp());
                     }
                     controller.pageIndex.value =
                         controller.popupMenuItemIndex.value;
                     print("Value:- $value");
-                    print("Value12:- ${ controller.popupMenuItemIndex.value}");
-                    print("Value14:- ${ controller.value.value}");
-                    print("Value19:- ${ controller.pageIndex.value}");
+                    print("Value12:- ${controller.popupMenuItemIndex.value}");
+                    print("Value14:- ${controller.value.value}");
+                    print("Value19:- ${controller.pageIndex.value}");
                   },
-
-                  itemBuilder: (context) =>
-                  [
+                  itemBuilder: (context) => [
                     PopupMenuItem(
                       child: Text(StringsUtils.history),
                       value: 1,
@@ -235,5 +257,33 @@ class customAppbar extends StatelessWidget {
       ),
     );
   }
+}
 
+Widget dataAppbar({required String text}) {
+  return Container(
+    color: AppColors.darkBlue,
+    child: Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            top: 6.h,
+            bottom: 1.h,
+            left: 4.w,
+          ),
+          child: DefaultTextStyle(
+            style: const TextStyle(
+                fontSize: 22.0,
+                fontFamily: 'Customtext',
+                color: AppColor.backgroundColor),
+            child: AnimatedTextKit(
+              pause: Duration(milliseconds: 100),
+              animatedTexts: [
+                TypewriterAnimatedText(text),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }

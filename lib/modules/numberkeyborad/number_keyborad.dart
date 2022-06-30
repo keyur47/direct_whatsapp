@@ -104,6 +104,32 @@ class NumPad extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // GestureDetector(
+              //     onTap: (){
+              //       clear();
+              //     },
+              //     child: Container(
+              //         height: buttonSize,
+              //         width: buttonSize,
+              //         child: Center(child: Text("C",style: TextStyle(),textAlign: TextAlign.center,)))),
+              // Container(
+              //   width: buttonSize,
+              //   height: buttonSize,
+              //   decoration: const BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: AppColor.backgroundColor,
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       "C",
+              //       style: TextStyle(
+              //         color: AppColor.appColors,
+              //         fontSize: 40,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               IconButton(
                 focusColor: Colors.transparent,
                 onPressed: () => clear(),
@@ -111,7 +137,7 @@ class NumPad extends StatelessWidget {
                 splashColor: Colors.transparent,
                 icon: Icon(
                   Icons.copyright,
-                  color: iconColor,
+                  color: AppColor.whatsAppColor,
                 ),
                 iconSize: buttonSize,
               ),
@@ -125,7 +151,7 @@ class NumPad extends StatelessWidget {
                 onPressed: () => delete(),
                 icon: Icon(
                   Icons.clear,
-                  color: iconColor,
+                  color: AppColor.whatsAppColor,
                 ),
                 iconSize: buttonSize,
               ),
@@ -173,7 +199,7 @@ class NumberButton extends StatelessWidget {
           child: Text(
             number.toString(),
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: AppColors.white, fontSize: 30),
+                fontWeight: FontWeight.bold, color: AppColors.white, fontSize: 30, fontFamily: 'Customtext',),
           ),
         ),
       ),

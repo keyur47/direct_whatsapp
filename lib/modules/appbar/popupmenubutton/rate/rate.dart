@@ -10,66 +10,77 @@ Future RateBox(context) {
   return showDialog(
     barrierDismissible: false,
     context: context,
-    builder: (BuildContext context) {
-      return CupertinoAlertDialog(
-        title: Column(
-          children: [
-            Icon(Icons.whatsapp,
-                size: 16.w,
-                color: AppColor.appColors,
-                shadows: [
-                  BoxShadow(
-                    color: AppColor.appColors.withOpacity(0.8),
-                    spreadRadius: 10,
-                    blurRadius: 7,
-                    offset: const Offset(
-                        2, 1),
-                  ),
-                ]),
-            SizedBox(
-              height: 1.h,
+    // barrierLabel: MaterialLocalizations.of(context)
+    //     .modalBarrierDismissLabel,
+    // barrierColor: Colors.black12,
+      builder: (BuildContext context) {
+        return Container(
+          margin: EdgeInsets.all(5.w),
+          child: CupertinoAlertDialog(
+            title: Column(
+              children: [
+                Icon(Icons.whatsapp,
+                    size: 16.w,
+                    color: AppColor.appColors,
+                    shadows: [
+                      BoxShadow(
+                        color: AppColor.appColors.withOpacity(0.8),
+                        spreadRadius: 10,
+                        blurRadius: 7,
+                        offset: const Offset(
+                            2, 1),
+                      ),
+                    ]),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Text(
+                  StringsUtils.feedBackTitle,
+                  style: TextStyle(fontWeight: FontWeight.w600,fontFamily: "Customtext"),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Text(
+                  StringsUtils.feedBackMessages,
+                  style: TextStyle(fontWeight: FontWeight.w300,
+                      fontSize: 13,
+                      color: AppColors.grey,fontFamily: "Customtext"),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+              ],
             ),
-            Text(
-              StringsUtils.feedBackTitle,
-              style: TextStyle(fontWeight: FontWeight.w600),
+            actions: [
+              CupertinoDialogAction(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text(StringsUtils.feedBackButtonNotNow,
+                    style: TextStyle(color: AppColors.green,fontFamily: "Customtext"),)),
+            ],
+            content: Center(
+              child: RatingBar.builder(
+                initialRating: 1.5,
+                minRating: 1,
+                itemSize: 2.5.h,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                itemBuilder: (context, _) =>
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                onRatingUpdate: (rating) {
+                  print(rating);
+                },
+              ),
             ),
-            SizedBox(
-              height: 1.h,
-            ),
-            Text(
-              StringsUtils.feedBackMessages,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 13,color: AppColors.grey),
-            ),
-            SizedBox(
-              height: 1.h,
-            ),
-          ],
-        ),
-        actions: [
-          CupertinoDialogAction(
-              onPressed: () {
-                Get.back();
-              }, child: Text(StringsUtils.feedBackButtonNotNow,style: TextStyle(color: AppColors.green),)),
-        ],
-        content: Center(
-          child: RatingBar.builder(
-            initialRating: 1.5,
-            minRating: 1,
-            itemSize: 2.5.h,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            itemCount: 5,
-            itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-            itemBuilder: (context, _) => Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (rating) {
-              print(rating);
-            },
           ),
-        ),
-      );
-    },
+        );
+      },
   );
 }

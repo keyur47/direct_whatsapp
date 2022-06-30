@@ -18,17 +18,38 @@ class Controller extends GetxController {
   FocusNode passwordFocusNode = FocusNode();
   FocusNode confirmFocusNode = FocusNode();
   List<String> numberList = [];
+  List<String> getNumberList = [];
   List<String> countryList = [];
   List<String> nameCountryList = [];
   List<String> nameTelegramList = [];
   List<String> dateTime = [];
+  List<String> type = [];
+  List<String>? typeTo = [];
   List<String> day = [];
   RxBool isOpenKeyboard  = false.obs;
+  RxBool isEnabled  = false.obs;
   RxBool Icon = false.obs;
   RxString url = ''.obs;
   RxString data = ''.obs;
   RxString countryName = ''.obs;
   RxString errorMessage = "".obs;
+  RxString uniqueNumbers = "".obs;
+
+  List colors = [
+    Colors.red,
+    Colors.yellow,
+    Colors.blue,
+    Colors.pink,
+    Colors.deepOrangeAccent,
+    Colors.green,
+    Colors.greenAccent,
+    Colors.purpleAccent,
+    Colors.purple,
+    Colors.deepPurpleAccent,
+    Colors.indigo,
+    Colors.orangeAccent,
+    Colors.lightBlueAccent,
+  ];
 
   void validateEmail(String val) {
     if(val.isEmpty){
