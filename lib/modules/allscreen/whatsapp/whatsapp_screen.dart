@@ -53,7 +53,7 @@ class _WhatsAppState extends State<WhatsApp> {
                             child: Column(
                               children: [
                                 phoneNumberTextField(
-                                    controller: controller.numberController,
+                                    controller: controller.contactsNumberController,
                                     showCursor: false,
                                     onTapV: () async {
                                       FocusScope.of(context).unfocus();
@@ -66,7 +66,7 @@ class _WhatsAppState extends State<WhatsApp> {
                                     textInputType: TextInputType.none,
                                     valueChanged: (country) {
                                       setState(() {
-                                        controller.data.value = country.dialCode;
+                                        controller.countryNumber.value = country.dialCode;
                                         controller.countryName.value = country.name;
                                       });
                                       print(
@@ -75,24 +75,23 @@ class _WhatsAppState extends State<WhatsApp> {
                                           'Country changed to name: ${country.name}');
                                     },
                                     onTap: () async {
-                                      List<String> data =
-                                          await SharedPrefs.getNumberList();
-                                      var dataType =
-                                          controller.numberController.text = data.last;
-                                      print("dataType:-  $dataType");
-                                      List<String> data1 =
-                                          await SharedPrefs.getCountryNumberList();
-                                      var dataType1 =
-                                          controller.data.value = data1.last;
-                                      print("dataType:-  $dataType1");
+                                      List<String> Number = await SharedPrefs.getNumberList();
+                                      var number = controller.contactsNumberController.text = Number.last;
+                                      print("Number:-  $number");
+                                      List<String> countryNumber = await SharedPrefs.getCountryNumberList();
+                                      var CountryNumber = controller.countryNumber.value = countryNumber.last;
+                                      print("countryNumber:-  $CountryNumber");
+                                      List<String> countryName = await SharedPrefs.getCountryNameList();
+                                      var CountryName = controller.countryName.value = countryName.last;
+                                      print("countryName:-  $CountryName");
                                     }),
                                 SizedBox(
                                   height: 1.5.h,
                                 ),
                                 textField(
-                                    focusNode: controller.confirmFocusNode,
+                                    focusNode: controller.textFocusNode,
                                     boxBorder: Border(),
-                                    controller: controller.textController,
+                                    controller: controller.contactsNumberTextController,
                                     hintText: StringsUtils.typeYourMessage,
                                     textInputType: TextInputType.text,
                                     onTap: () {
@@ -101,7 +100,7 @@ class _WhatsAppState extends State<WhatsApp> {
                                     maxLines: 7,
                                     color: AppColor.whiteColor,
                                     textStyle:
-                                        TextStyle(color: AppColors.grey, fontSize: 16,fontFamily: "Customtext"),
+                                        TextStyle(color: AppColors.grey, fontSize: 15,),
                                     style: const TextStyle(
                                         fontSize: 16, color: AppColors.grey),
                                     cursorColor: Colors.black),
@@ -132,25 +131,25 @@ class _WhatsAppState extends State<WhatsApp> {
                                   buttonSize: 15.w,
                                   buttonColor: AppColors.darkBlue,
                                   iconColor: AppColors.green,
-                                  controller: controller.numberController,
+                                  controller: controller.contactsNumberController,
                                   delete: () {
-                                    controller.numberController.text =
-                                        controller.numberController.text.substring(
+                                    controller.contactsNumberController.text =
+                                        controller.contactsNumberController.text.substring(
                                             0,
-                                            controller.numberController.text.length -
+                                            controller.contactsNumberController.text.length -
                                                 1);
                                   },
                                   clear: () {
-                                    controller.numberController.clear();
+                                    controller.contactsNumberController.clear();
                                   },
                                   onSubmit: () {
                                     debugPrint(
-                                        'Your code: ${controller.numberController.text}');
+                                        'Your code: ${controller.contactsNumberController.text}');
                                     showDialog(
                                       context: context,
                                       builder: (_) => AlertDialog(
                                         content: Text(
-                                          "You code is ${controller.numberController.text}",
+                                          "You code is ${controller.contactsNumberController.text}",
                                           style: const TextStyle(fontSize: 30),
                                         ),
                                       ),

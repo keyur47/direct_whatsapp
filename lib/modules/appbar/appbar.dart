@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
-import 'package:direct_whatsapp/modules/allscreen/messages/sms_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/messages/messages_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
 import 'package:direct_whatsapp/modules/appbar/appbar_controller.dart';
@@ -54,12 +54,6 @@ class customAppbar extends StatelessWidget {
     return SafeArea(
       child: Stack(
         children: [
-          // Image.network(
-          //   "https://thumbs.gfycat.com/AccurateScrawnyAnkole-size_restricted.gif",
-          //   height: 8.h,
-          //   width: 100.w,
-          //   fit: BoxFit.cover,
-          // ),
           Padding(
             padding: EdgeInsets.only(left: 4.w, top: 2.w),
             child: Row(
@@ -85,70 +79,28 @@ class customAppbar extends StatelessWidget {
                           icon,
                           size: size,
                           color: iconColor,
-                          // shadows: [
-                          //   BoxShadow(
-                          //     color: iconColors.withOpacity(0.8),
-                          //     spreadRadius: 10,
-                          //     blurRadius: 7,
-                          //     offset: const Offset(
-                          //         2, 1), // changes position of shadow
-                          //   ),
-                          // ]
                         ),
                       ),
                     ),
                     SizedBox(
                       width: 2.w,
                     ),
-                    // DefaultTextStyle(
-                    //   style: const TextStyle(
-                    //       fontSize: 18.0,
-                    //       fontFamily: 'Customtext',
-                    //       color: AppColors.darkBlue),
-                    //   child: Obx(
-                    //     () => AnimatedTextKit(
-                    //       pause: Duration(milliseconds: 100),
-                    //       animatedTexts: [
-                    //         WavyAnimatedText(
-                    //             '${data[controller.pageIndex.value]}'),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     Text("${data[controller.pageIndex.value]}",style: TextStyle(fontSize: 18,
                         fontFamily: "Customtext",
                         color:   AppColors.darkBlue,),),
                     PopupMenuButton(
                       elevation: 20,
-
-                      // child: Neon(
-                      //   textStyle: TextStyle(),
-                      //   text: '${data[controller.pageIndex.value]}',
-                      //   color:  Colors.primaries[Random().nextInt(Colors.primaries.length)],
-                      //   fontSize: 18,
-                      //   font: NeonFont.TextMeOne,
-                      //   flickeringText: true,
-                      //   flickeringLetters: null,
-                      //   glowingDuration: Duration(seconds: 1),
-                      // ),
-
                       child: Icon(Icons.keyboard_arrow_down_sharp),
-                      // Text("${data[controller.pageIndex.value]}",style: TextStyle(
-                      // fontSize: 18,
-                      // fontFamily: "Customtext",
-                      // color:   AppColors.darkBlue,
-                      // fontWeight: FontWeight.w700))
-
                       onSelected: (int value) {
                         controller.popupMenuItemIndex.value = value;
                         if (controller.popupMenuItemIndex.value == 1) {
-                          Get.to(WhatsApp());
+                          Get.offAllNamed(WhatsApp.routeName);
                         } else if (controller.popupMenuItemIndex.value == 2) {
-                          Get.to(Instagram());
+                          Get.offAllNamed(Instagram.routeName);
                         } else if (controller.popupMenuItemIndex.value == 3) {
-                          Get.to(Telegram());
+                          Get.offAllNamed(Telegram.routeName);
                         } else if (controller.popupMenuItemIndex.value == 4) {
-                          Get.to(SmsNumber());
+                          Get.offAllNamed(Messages.routeName);
                         } else {}
                         // controller.value.value = "${controller.popupMenuItemIndex.value}";
                         controller.pageIndex.value =
@@ -259,7 +211,38 @@ class customAppbar extends StatelessWidget {
   }
 }
 
-Widget dataAppbar({required String text}) {
+Widget contactsAppbar({required String text , IconData? iconData }) {
+  return Container(
+    color: AppColors.darkBlue,
+    child: Padding(
+      padding: EdgeInsets.only(
+        top: 6.h,
+        bottom: 1.h,
+        left: 4.w,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          GestureDetector( onTap: (){Get.back();},child:  Icon(iconData,color: Colors.white,)),
+          SizedBox(width: 1.w,),
+          DefaultTextStyle(
+            style: const TextStyle(
+                fontSize: 22.0,
+                fontFamily: 'Customtext',
+                color: AppColor.backgroundColor),
+            child: AnimatedTextKit(
+              pause: Duration(milliseconds: 100),
+              animatedTexts: [
+                TypewriterAnimatedText(text),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+Widget usernameAppbar({required String text }) {
   return Container(
     color: AppColors.darkBlue,
     child: Row(

@@ -3,6 +3,7 @@ import 'package:direct_whatsapp/main.dart';
 import 'package:direct_whatsapp/modules/appbar/appbar.dart';
 import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/modules/numberkeyborad/number_keyborad.dart';
+import 'package:direct_whatsapp/modules/openbutton/open_call.dart';
 import 'package:direct_whatsapp/modules/openbutton/open_number_sms.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
@@ -11,14 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class SmsNumber extends StatefulWidget {
-  static const routeName = '/homePage_screen';
+class Messages extends StatefulWidget {
+  static const routeName = '/messages_screen';
 
   @override
-  _SmsNumberState createState() => _SmsNumberState();
+  _MessagesState createState() => _MessagesState();
 }
 
-class _SmsNumberState extends State<SmsNumber> {
+class _MessagesState extends State<Messages> {
   Controller controller = Get.find();
 
   @override
@@ -51,7 +52,7 @@ class _SmsNumberState extends State<SmsNumber> {
                   child: Column(
                     children: [
                       phoneNumberTextField(
-                          controller: controller.smsNumberController,
+                          controller: controller.callAndMessagesNumberController,
                           showCursor: false,
                           onTapV: () async {
                             FocusScope.of(context).unfocus();
@@ -64,31 +65,30 @@ class _SmsNumberState extends State<SmsNumber> {
                           textInputType: TextInputType.none,
                           valueChanged: (country) {
                             setState(() {
-                              controller.data.value = country.dialCode;
+                              controller.countryNumber.value = country.dialCode;
                               controller.countryName.value = country.name;
                             });
                             print('Country changed to: ${country.dialCode}');
                             print('Country changed to name: ${country.name}');
                           },
                           onTap: () async {
-                            List<String> data =
-                                await SharedPrefs.getNumberList();
-                            var dataType =
-                                controller.smsNumberController.text = data.last;
-                            print("dataType:-  $dataType");
-                            List<String> data1 =
-                                await SharedPrefs.getCountryNumberList();
-                            var dataType1 =
-                                controller.data.value = data1.last;
-                            print("dataType:-  $dataType1");
+                            List<String> smsNumber = await SharedPrefs.getNumberList();
+                            var SmsNumber = controller.callAndMessagesNumberController.text = smsNumber.last;
+                            print("SmsNumber:-  $SmsNumber");
+                            List<String> countryNumber = await SharedPrefs.getCountryNumberList();
+                            var CountryNumber = controller.countryNumber.value = countryNumber.last;
+                            print("countryNumber:-  $CountryNumber");
+                            List<String> countryName = await SharedPrefs.getCountryNameList();
+                            var CountryName = controller.countryName.value = countryName.last;
+                            print("countryName:-  $CountryName");
                           }),
                       SizedBox(
                         height: 1.5.h,
                       ),
                       textField(
-                          focusNode: controller.confirmFocusNode,
+                          focusNode: controller.textFocusNode,
                           boxBorder: Border(),
-                          controller: controller.smsTextController,
+                          controller: controller.messagesNumberTextController,
                           hintText: StringsUtils.typeYourMessage,
                           textInputType: TextInputType.text,
                           onTap: () {
@@ -97,9 +97,9 @@ class _SmsNumberState extends State<SmsNumber> {
                           maxLines: 7,
                           color: AppColor.whiteColor,
                           textStyle:
-                              TextStyle(color: AppColors.grey, fontSize: 14),
+                              TextStyle(color: AppColors.grey, fontSize: 15),
                           style: const TextStyle(
-                              fontSize: 16, color: AppColors.grey,fontFamily: "Customtext"),
+                              fontSize: 16, color: AppColors.grey),
                           cursorColor: Colors.black),
                     ],
                   ),
@@ -107,36 +107,46 @@ class _SmsNumberState extends State<SmsNumber> {
                 SizedBox(
                   height: 1.5.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    OpenSmsNumber(),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      OpenCalls(),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      OpenSmsNumber(),
+                      // SizedBox(
+                      //   width: 4.w,
+                      // ),
+                    ],
+                  ),
                 ),
                 showNumericContainer.value
                     ? NumPad(
                         buttonSize: 15.w,
                         buttonColor: AppColors.darkBlue,
                         iconColor: AppColors.green,
-                        controller: controller.smsNumberController,
+                        controller: controller.callAndMessagesNumberController,
                         delete: () {
-                          controller.smsNumberController.text =
-                              controller.smsNumberController.text.substring(
+                          controller.callAndMessagesNumberController.text =
+                              controller.callAndMessagesNumberController.text.substring(
                                   0,
-                                  controller.smsNumberController.text.length -
+                                  controller.callAndMessagesNumberController.text.length -
                                       1);
                         },
                         clear: () {
-                          controller.smsNumberController.clear();
+                          controller.callAndMessagesNumberController.clear();
                         },
                         onSubmit: () {
                           debugPrint(
-                              'Your code: ${controller.smsNumberController.text}');
+                              'Your code: ${controller.callAndMessagesNumberController.text}');
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
                               content: Text(
-                                "You code is ${controller.smsNumberController.text}",
+                                "You code is ${controller.callAndMessagesNumberController.text}",
                                 style: const TextStyle(fontSize: 30),
                               ),
                             ),

@@ -42,8 +42,8 @@ Widget phoneNumberTextField({
         border: Border(right: BorderSide(color: Colors.grey, width: 1)),
       ),
       onCountryChanged: valueChanged,
-      initialCountryCode: "IN",
-      dropdownTextStyle: const TextStyle(color: AppColors.grey, fontSize: 14),
+      initialCountryCode: "",
+      dropdownTextStyle: const TextStyle(color: AppColors.grey, fontSize: 15,),
       showDropdownIcon: true,
       showCountryFlag: false,
       invalidNumberMessage: "",
@@ -58,7 +58,7 @@ Widget phoneNumberTextField({
             )),
         border: InputBorder.none,
         hintText: hintText,
-        hintStyle: const TextStyle(color: AppColors.grey,fontFamily: "Customtext",fontSize: 15),
+        hintStyle: const TextStyle(color: AppColors.grey,fontSize: 15),
       ),
       controller: controller,
       showCursor: showCursor,
@@ -97,7 +97,7 @@ Widget usernameTextField({
               prefixIcon: Icon(Icons.search),
               suffixIcon: GestureDetector(onTap: onTap, child: Icon(Icons.close)),
               hintText: hintText,
-              hintStyle: TextStyle(fontFamily: "Customtext",fontSize: 16)
+              hintStyle: TextStyle(fontSize: 16)
           )),
     ),
   );

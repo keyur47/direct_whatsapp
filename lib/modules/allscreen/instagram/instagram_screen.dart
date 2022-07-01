@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class Instagram extends StatefulWidget {
+  static const routeName = '/instagram_screen';
   @override
   _InstagramState createState() => _InstagramState();
 }

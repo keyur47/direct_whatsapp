@@ -19,10 +19,10 @@ class OpenUserNameTelegram extends StatelessWidget {
     return button(
         onTap: () async {
           if (controller.telegramUsernameController.text.isNotEmpty) {
-            controller.nameTelegramList
+            controller.usernameList
                 .addAll([controller.telegramUsernameController.text]);
-            await SharedPrefs.setUserNameList(controller.nameTelegramList);
-            print("object${controller.numberList}");
+            await SharedPrefs.setUserNameList(controller.usernameList);
+            print("object${controller.contactsNumberList}");
             controller.dateTime.addAll([dateTime()]);
             await SharedPrefs.setDateTimeList(controller.dateTime);
             print("dateTime${controller.dateTime}");

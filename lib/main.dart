@@ -1,15 +1,18 @@
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
 import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
-import 'package:direct_whatsapp/modules/allscreen/messages/sms_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/messages/messages_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/feedback/feedback.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/contacts/chat/chat_history.dart';
+import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/contacts/contacts_number.dart';
 import 'package:direct_whatsapp/modules/splash/splash_screen.dart';
 import 'package:direct_whatsapp/utils/my_behavior.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
 import 'modules/controller/all_screen_controller.dart';
-import 'widgets/bottom_navigation_bar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
             getPages: [
               GetPage(
                 name: SplashScreen.routeName,
-                page: () => const SplashScreen(),
+                page: () => SplashScreen(),
                 transition: Transition.leftToRight,
               ),
               GetPage(
@@ -60,8 +63,28 @@ class MyApp extends StatelessWidget {
                 transition: Transition.leftToRight,
               ),
               GetPage(
+                name: Instagram.routeName,
+                page: () => Instagram(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
+                name: Telegram.routeName,
+                page: () => Telegram(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
+                name: Messages.routeName,
+                page: () => Messages(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
                 name: TabBarApp.routeName,
                 page: () => TabBarApp(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
+                name: ContactsList.routeName,
+                page: () => ContactsList(),
                 transition: Transition.leftToRight,
               ),
             ],

@@ -21,9 +21,9 @@ class OpenUserNameInstagram extends StatelessWidget {
         onTap: () async {
           if (controller
               .instagramUsernameController.text.isNotEmpty) {
-            controller.nameTelegramList.addAll([controller.instagramUsernameController.text]);
-            await SharedPrefs.setUserNameList(controller.nameTelegramList);
-            print("object${controller.numberList}");
+            controller.usernameList.addAll([controller.instagramUsernameController.text]);
+            await SharedPrefs.setUserNameList(controller.usernameList);
+            print("object${controller.contactsNumberList}");
             controller.dateTime.addAll([dateTime()]);
             await SharedPrefs.setDateTimeList(controller.dateTime);
             print("dateTimeinstagram${controller.dateTime}");

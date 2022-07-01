@@ -3,7 +3,6 @@ import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/username/
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
-import 'package:direct_whatsapp/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';

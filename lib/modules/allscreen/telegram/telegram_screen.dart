@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class Telegram extends StatefulWidget {
+  static const routeName = '/telegram_screen';
+
   @override
   _TelegramState createState() => _TelegramState();
 }

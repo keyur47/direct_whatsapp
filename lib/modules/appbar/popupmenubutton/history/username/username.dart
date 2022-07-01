@@ -1,7 +1,8 @@
+import 'dart:math';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
 import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
-import 'package:direct_whatsapp/modules/appbar/appbar.dart';
 import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
 import 'package:direct_whatsapp/utils/app_color.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
@@ -28,65 +29,64 @@ class _UserNameState extends State<UserName> {
   }
 
   getData() async {
-    controller.nameTelegramList = await SharedPrefs.getUserNameList();
+    controller.usernameList = await SharedPrefs.getUserNameList();
     controller.dateTime = await SharedPrefs.getDateTimeList();
 
     setState(() {
-      controller.nameTelegramList.join("");
+      controller.usernameList.join("");
       controller.dateTime.join("");
     });
-    print("------------>>>${controller.nameTelegramList}");
+    print("------------>>>${controller.usernameList}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: AppColor.backgroundColor,
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: AppColors.darkBlue,
-      //   title: DefaultTextStyle(
-      //     style: const TextStyle(
-      //         fontSize: 22.0,
-      //         fontFamily: 'Customtext',
-      //         color: AppColor.backgroundColor),
-      //     child: AnimatedTextKit(
-      //       pause: Duration(milliseconds: 100),
-      //       animatedTexts: [
-      //         WavyAnimatedText(StringsUtils.userNameHistory),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        toolbarHeight: 8.h,
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.darkBlue,
+        title: DefaultTextStyle(
+          style: const TextStyle(
+              fontSize: 22.0,
+              fontFamily: 'Customtext',
+              color: AppColor.backgroundColor),
+          child: AnimatedTextKit(
+            pause: Duration(milliseconds: 100),
+            animatedTexts: [
+              TypewriterAnimatedText(StringsUtils.userNameHistory),
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: [
-          dataAppbar(text: "${StringsUtils.userNameHistory}"),
-          controller.nameTelegramList.isEmpty
+          // usernameAppbar(text: "${StringsUtils.userNameHistory}"),
+          controller.usernameList.isEmpty
               ? Center(
                   child: Image.asset(
                   "assets/image/no_data.png",
                   scale: 5,
                 ))
               : Padding(
-                  padding: EdgeInsets.only(left: 3.w, right: 3.w, top: 12.h),
+                  padding: EdgeInsets.only(left: 3.w, right: 3.w, top: 1.h),
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
-                    itemCount: controller.nameTelegramList.length,
+                    itemCount: controller.usernameList.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
                           SwipeActionCell(
                             key: ObjectKey(
-                              controller.nameTelegramList[index],
+                              controller.usernameList[index],
                             ),
                             trailingActions: <SwipeAction>[
                               SwipeAction(
                                   icon: Icon(Icons.delete, color: Colors.red),
                                   onTap: (CompletionHandler handler) async {
-                                    // controller.numberList[index] = await SharedPrefs.remove().toString();
-                                    await controller.nameTelegramList
-                                        .removeAt(index)[index];
-                                    // await SharedPrefs.remove();
+                                    await controller.usernameList.removeAt(index)[index];
+                                    await SharedPrefs.setUserNameList(controller.usernameList);
                                     setState(() {});
                                   },
                                   color: Colors.transparent),
@@ -130,7 +130,7 @@ class _UserNameState extends State<UserName> {
                                                             controller
                                                                 .telegramUsernameController
                                                                 .text = controller
-                                                                    .nameTelegramList[
+                                                                    .usernameList[
                                                                 index];
                                                             Get.to(Telegram());
                                                           },
@@ -151,7 +151,7 @@ class _UserNameState extends State<UserName> {
                                                             controller
                                                                 .instagramUsernameController
                                                                 .text = controller
-                                                                    .nameTelegramList[
+                                                                    .usernameList[
                                                                 index];
                                                             Get.to(Instagram());
                                                           },
@@ -171,7 +171,7 @@ class _UserNameState extends State<UserName> {
                                     children: [
                                       CircleAvatar(
                                         backgroundColor:
-                                            controller.colors[index],
+                                        Colors.primaries[Random().nextInt(Colors.primaries.length)],
                                         child: Stack(
                                           children: [
                                             // Text(
@@ -185,10 +185,11 @@ class _UserNameState extends State<UserName> {
                                             //   ),
                                             // ),
                                             Text(
-                                              "${controller.nameTelegramList[index].substring(0, 1).toUpperCase()}",
+                                              "${controller.usernameList[index].substring(0, 1).toUpperCase()}",
                                               style: TextStyle(
                                                 fontSize: 24,
                                                 color: Colors.white,
+                                                  fontFamily: "Customtext"
                                               ),
                                             ),
                                           ],
@@ -204,9 +205,10 @@ class _UserNameState extends State<UserName> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${controller.nameTelegramList[index].toUpperCase()}",
+                                              "${controller.usernameList[index].toUpperCase()}",
                                               style: TextStyle(
                                                   color: AppColors.black,
+                                                  fontFamily: "Customtext",
                                                   fontSize: 16),
                                             ),
                                             Text(

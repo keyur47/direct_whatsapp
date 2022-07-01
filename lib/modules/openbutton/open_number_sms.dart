@@ -27,28 +27,28 @@ class _OpenSmsNumberState extends State<OpenSmsNumber> {
   Widget build(BuildContext context) {
     return button(
         onTap: () async {
-          if (controller.smsNumberController.text.isNotEmpty) {
-            if (controller.data.isNotEmpty) {
-              controller.numberList.addAll([controller.smsNumberController.text]);
-              await SharedPrefs.setNumberList(controller.numberList);
-              print("object${controller.numberList}");
-              controller.countryList.addAll([controller.data.value]);
-              await SharedPrefs.setCountryNumberList(controller.countryList);
-              print("CountryObject${controller.countryList}");
-              controller.nameCountryList.addAll([controller.countryName.value]);
-              await SharedPrefs.setCountryNameList(controller.nameCountryList);
-              print("CountryObjectName${controller.nameCountryList}");
+          if (controller.callAndMessagesNumberController.text.isNotEmpty) {
+            if (controller.countryNumber.isNotEmpty) {
+              controller.contactsNumberList.addAll([controller.callAndMessagesNumberController.text]);
+              await SharedPrefs.setNumberList(controller.contactsNumberList);
+              print("object${controller.contactsNumberList}");
+              controller.countryNumberList.addAll([controller.countryNumber.value]);
+              await SharedPrefs.setCountryNumberList(controller.countryNumberList);
+              print("CountryObject${controller.countryNumberList}");
+              controller.countryNameList.addAll([controller.countryName.value]);
+              await SharedPrefs.setCountryNameList(controller.countryNameList);
+              print("CountryObjectName${controller.countryNameList}");
               controller.dateTime.addAll([dateTime()]);
               await SharedPrefs.setDateTimeList(controller.dateTime);
               print("dateTime${controller.dateTime}");
               if (Platform.isAndroid) {
                 final uri =
-                    'sms:+${controller.data.value}${controller.smsNumberController.text}?body=${controller.smsTextController.text}%20';
+                    'sms:+${controller.countryNumber.value}${controller.callAndMessagesNumberController.text}?body=${controller.messagesNumberTextController.text}%20';
                 log("Sms :- $uri");
                 await launch(uri);
               } else if (Platform.isIOS) {
                 final uri =
-                    'sms:${controller.smsNumberController.text}&body=${controller.smsTextController.text}%20';
+                    'sms:${controller.callAndMessagesNumberController.text}&body=${controller.messagesNumberTextController.text}%20';
                 await launch(uri);
               }
             } else {

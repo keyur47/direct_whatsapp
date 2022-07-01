@@ -86,16 +86,23 @@ class SharedPrefs {
     return prefs.getStringList("dayList") ?? [];
   }
 
+  static Future<void> setChatList(List<String> ChatList) async {
+    final SharedPreferences prefs = await prefsData;
+    await prefs.setStringList("chatList", ChatList);
+  }
+
+  static Future<List<String>> getChatList() async {
+    final SharedPreferences prefs = await prefsData;
+    return prefs.getStringList("chatList") ?? [];
+  }
+
+
+
+
   static Future<void> remove() async {
     final SharedPreferences prefs = await prefsData;
     await prefs.remove("numberList");
   }
-
-  // static Future<void> setList(List<String> value) async {
-  //   final SharedPreferences prefs = await prefsData;
-  //   await prefs.setStringList("numberList",value);
-  // }
-
 
   static Future<void> clear() async {
     final SharedPreferences prefs = await prefsData;

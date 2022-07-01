@@ -18,22 +18,22 @@ class OpenTelegramNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return button(
       onTap: () async {
-        if (controller.numberController.text.isNotEmpty) {
-          if (controller.data.value.isNotEmpty) {
-            controller.numberList.addAll([controller.numberController.text]);
-            await SharedPrefs.setNumberList(controller.numberList);
-            print("object${controller.numberList}");
-            controller.countryList.addAll([controller.data.value]);
-            await SharedPrefs.setCountryNumberList(controller.countryList);
-            print("CountryObject${controller.countryList}");
-            controller.nameCountryList.addAll([controller.countryName.value]);
-            await SharedPrefs.setCountryNameList(controller.nameCountryList);
-            print("CountryObjectName${controller.nameCountryList}");
+        if (controller.contactsNumberController.text.isNotEmpty) {
+          if (controller.countryNumber.value.isNotEmpty) {
+            controller.contactsNumberList.addAll([controller.contactsNumberController.text]);
+            await SharedPrefs.setNumberList(controller.contactsNumberList);
+            print("object${controller.contactsNumberList}");
+            controller.countryNumberList.addAll([controller.countryNumber.value]);
+            await SharedPrefs.setCountryNumberList(controller.countryNumberList);
+            print("CountryObject${controller.countryNumberList}");
+            controller.countryNameList.addAll([controller.countryName.value]);
+            await SharedPrefs.setCountryNameList(controller.countryNameList);
+            print("CountryObjectName${controller.countryNameList}");
             controller.dateTime.addAll([dateTime()]);
             await SharedPrefs.setDateTimeList(controller.dateTime);
             print("dateTime${controller.dateTime}");
             controller.url.value =
-                "https://telegram.me/+${controller.data.value}${controller.numberController.text}";
+                "https://telegram.me/+${controller.countryNumber.value}${controller.contactsNumberController.text}";
             await launch(controller.url.value);
             print("------${controller.url.value}");
           } else {
