@@ -64,7 +64,8 @@ class OpenTelegramNumber extends StatelessWidget {
       boxColor: AppColors.white,
       textColor: AppColors.black,
       sizeIcon: 7.w,
-      iconColor: Colors.blue,
+      iconColor:  Color(0xFF28D146),
+      // iconColor: Colors.blue,
     );
   }
 }

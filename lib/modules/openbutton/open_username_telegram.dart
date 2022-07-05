@@ -49,12 +49,16 @@ class OpenUserNameTelegram extends StatelessWidget {
         bottom: 1.1.h,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: Colors.blue,
+        iconColor:   Color(0xFF28D146),
+        // iconColor: Colors.blue,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomRight,
-              colors: [Colors.white, Colors.white]),
+              colors: [
+                Colors.white,
+                Colors.white,
+              ]),
         ),
         sizeIcon: 7.w);
   }

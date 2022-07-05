@@ -1,17 +1,15 @@
 import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/messages/messages_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/snapchat/snapchat_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/feedback/feedback.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/bottom_navigationbar.dart';
-import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/contacts/chat/chat_history.dart';
 import 'package:direct_whatsapp/modules/appbar/popupmenubutton/history/contacts/contacts_number.dart';
 import 'package:direct_whatsapp/modules/splash/splash_screen.dart';
 import 'package:direct_whatsapp/utils/my_behavior.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
 import 'modules/controller/all_screen_controller.dart';
 
 void main() async {
@@ -75,6 +73,11 @@ class MyApp extends StatelessWidget {
               GetPage(
                 name: Messages.routeName,
                 page: () => Messages(),
+                transition: Transition.leftToRight,
+              ),
+              GetPage(
+                name: Snapchat.routeName,
+                page: () => Snapchat(),
                 transition: Transition.leftToRight,
               ),
               GetPage(

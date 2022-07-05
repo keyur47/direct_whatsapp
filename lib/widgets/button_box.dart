@@ -33,7 +33,8 @@ Widget button(
               blurRadius: 4,
               offset: Offset(4, 8), // Shadow position
             ),
-          ]
+          ],
+          // border: Border.all(width: 0.1)
       ),
       child:Padding(
         padding: EdgeInsets.only(
@@ -44,7 +45,7 @@ Widget button(
               children: [
                 Container(
                         decoration: decoration,
-                        child: Icon(iconData, color: iconColor, size: sizeIcon)),
+                        child: Icon(iconData, color: iconColor, size: sizeIcon,)),
                 SizedBox(
                   width: 1.w,
                 ),

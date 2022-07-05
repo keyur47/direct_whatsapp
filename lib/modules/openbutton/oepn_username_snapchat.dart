@@ -11,8 +11,8 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class OpenUserNameInstagram extends StatelessWidget {
-  OpenUserNameInstagram({Key? key}) : super(key: key);
+class OpenUserNameSnapchat extends StatelessWidget {
+  OpenUserNameSnapchat({Key? key}) : super(key: key);
 
   Controller controller = Get.find();
   @override
@@ -20,14 +20,14 @@ class OpenUserNameInstagram extends StatelessWidget {
     return button(
         onTap: () async {
           if (controller
-              .instagramUsernameController.text.isNotEmpty) {
-            controller.usernameList.addAll([controller.instagramUsernameController.text]);
+              .snapchatUsernameController.text.isNotEmpty) {
+            controller.usernameList.addAll([controller.snapchatUsernameController.text]);
             await SharedPrefs.setUserNameList(controller.usernameList);
             print("object${controller.contactsNumberList}");
             controller.dateTime.addAll([dateTime()]);
             await SharedPrefs.setDateTimeList(controller.dateTime);
-            print("dateTimeInstagram${controller.dateTime}");
-            controller.url.value = "instagram://user?username=${controller.instagramUsernameController.text}";
+            print("dateTimeSnapchat${controller.dateTime}");
+            controller.url.value = "https://www.snapchat.com/add/${controller.snapchatUsernameController.text}/";
             await launch(controller.url.value);
             print("------${controller.url.value}");
           } else {
@@ -39,8 +39,8 @@ class OpenUserNameInstagram extends StatelessWidget {
             );
           }
         },
-        text: StringsUtils.instagram,
-        iconData: CustomIcons.instagram,
+        text: StringsUtils.snapchat,
+        iconData: Icons.snapchat,
         image: "assets/image/whatsapp.png",
         scale: 3,
         top: 1.1.h,
@@ -53,24 +53,14 @@ class OpenUserNameInstagram extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomRight,colors: [
-                  Colors.white,
-                  Colors.white,
-              // AppColors.darkBlue,
-              // AppColors.darkBlue,
-              // Color(0xFF405DE6),
-              // Color(0xFF5851DB),
-              // Color(0xFF833AB4),
-              // Color(0xFFC13584),
-              // Color(0xFFE1306C),
-              // Color(0xFFFD1D1D),
-              // Color(0xFFF56040),
-              // Color(0xFFF77737),
-              // Color(0xFFFCAF45),
-              // Color(0xFFFFDC80),
+           // AppColors.darkBlue,
+           // AppColors.darkBlue,
+              Colors.white,
+              Colors.white,
             ]),
             borderRadius: BorderRadius.circular(5)
         ),
-        iconColor: Color(0xFF28D146),);
+        iconColor: Color(0xFF28D146));
   }
 }
 

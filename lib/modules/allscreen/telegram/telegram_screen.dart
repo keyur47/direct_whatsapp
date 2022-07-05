@@ -29,17 +29,21 @@ class _TelegramState extends State<Telegram> {
           customAppbar(
             text: StringsUtils.telegramDirects,
             icon: Icons.telegram,
-            iconColor: Colors.lightBlue,
-            iconColors: Colors.lightBlue,
+            iconColor: Colors.white,
+            iconColors: Colors.white,
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomRight,
-                colors: [Colors.white, Colors.white]),
+                colors: [
+                  AppColors.darkBlue,
+                  AppColors.darkBlue,
+                ]),
             top: 0.4.h,
             bottom: 0.4.h,
             right: 0.9.w,
             left: 0.9.w,
             size: 10.w,
+            directText: StringsUtils.telegramDirects,
           ),
           Padding(
             padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.w),

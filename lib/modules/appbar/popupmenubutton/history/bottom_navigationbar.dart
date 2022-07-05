@@ -30,13 +30,13 @@ class _TabBarAppState extends State<TabBarApp> {
         bucket: bucket,
         child: currentScreen,
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.darkBlue,
-        child: Icon(Icons.home),
-        onPressed: () {
-          Get.to(WhatsApp());
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: AppColors.darkBlue,
+      //   child: Icon(Icons.home),
+      //   onPressed: () {
+      //     Get.toNamed(WhatsApp.routeName);
+      //   },
+      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         color: AppColor.backgroundColor,

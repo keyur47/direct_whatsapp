@@ -97,8 +97,6 @@ class SharedPrefs {
   }
 
 
-
-
   static Future<void> remove() async {
     final SharedPreferences prefs = await prefsData;
     await prefs.remove("numberList");

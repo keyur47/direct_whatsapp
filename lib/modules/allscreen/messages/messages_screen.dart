@@ -46,6 +46,7 @@ class _MessagesState extends State<Messages> {
                   right: 1.5.w,
                   left: 1.4.w,
                   size: 8.w,
+                  directText: StringsUtils.smsDirects,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 4.w, right: 4.w, top: 2.w),

@@ -1,3 +1,4 @@
+import 'package:direct_whatsapp/model/model.dart';
 import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class Controller extends GetxController {
   TextEditingController messagesNumberTextController = TextEditingController();
   TextEditingController telegramUsernameController = TextEditingController();
   TextEditingController instagramUsernameController = TextEditingController();
+  TextEditingController snapchatUsernameController = TextEditingController();
   TextEditingController emailFeedBackController = TextEditingController();
   TextEditingController FeedBackController = TextEditingController();
   TextEditingController callNumberController = TextEditingController();
@@ -22,6 +24,7 @@ class Controller extends GetxController {
   List<String> countryNumberList = [];
   List<String> countryNameList = [];
   List<String> usernameList = [];
+  List<String> toSetUsernameList = [];
   List<String> dateTime = [];
   List<String> day = [];
   List<String> type = [];
@@ -30,7 +33,6 @@ class Controller extends GetxController {
   RxString countryNumber = ''.obs;
   RxString countryName = ''.obs;
   RxString errorMessage = "".obs;
-
 
 
   void validateEmail(String val) {
@@ -42,6 +44,7 @@ class Controller extends GetxController {
         errorMessage.value = "";
     }
   }
+
 
 
 

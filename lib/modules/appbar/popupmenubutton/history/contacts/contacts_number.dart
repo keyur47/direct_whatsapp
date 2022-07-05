@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:direct_whatsapp/helper/shared_preferences.dart';
+import 'package:direct_whatsapp/model/model.dart';
 import 'package:direct_whatsapp/modules/allscreen/messages/messages_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
 import 'package:direct_whatsapp/modules/controller/all_screen_controller.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
 import 'chat/chat_history.dart';
 
 class ContactsList extends StatefulWidget {
@@ -40,9 +38,12 @@ class _ContactsListState extends State<ContactsList> {
     controller.day = await SharedPrefs.getDayList();
     controller.type = await SharedPrefs.getTypeList();
     controller.chatContactsNumberList = await SharedPrefs.getChatList();
-    // var data = controller.numberList.toSet().toList();
-    controller.toSetContactsNumberList =
-        controller.contactsNumberList.toSet().toList();
+    controller.toSetContactsNumberList = controller.contactsNumberList.toSet().toList();
+    // controller.dateTime.sort((a, b) {
+    //   var adate = a; //before -> var adate = a.expiry;
+    //   var bdate = b;
+    //   return -adate.compareTo(bdate);
+    // });
     setState(() {
       controller.contactsNumberList.join("");
       controller.countryNumberList.join("");
@@ -86,7 +87,7 @@ class _ContactsListState extends State<ContactsList> {
       body: Stack(
         children: [
           // contactsAppbar(iconData: Icons.arrow_back_rounded ,text: "${StringsUtils.contactsHistory}",),
-          controller.contactsNumberList.isEmpty
+          controller.toSetContactsNumberList.isEmpty
               ? Center(
                   child: Image.asset(
                   "assets/image/no_data.png",
@@ -102,16 +103,14 @@ class _ContactsListState extends State<ContactsList> {
                         children: [
                           SwipeActionCell(
                             key: ObjectKey(
-                              controller.contactsNumberList[index],
+                              controller.toSetContactsNumberList[index],
                             ),
                             trailingActions: <SwipeAction>[
                               SwipeAction(
                                   icon: Icon(Icons.delete, color: Colors.red),
                                   onTap: (CompletionHandler handler) async {
-                                    await controller.contactsNumberList
-                                        .removeAt(index)[index];
-                                    await SharedPrefs.setNumberList(
-                                        controller.contactsNumberList);
+                                    await controller.toSetContactsNumberList.removeAt(index)[index];
+                                    await SharedPrefs.setNumberList(controller.toSetContactsNumberList);
                                     setState(() {});
                                   },
                                   color: Colors.transparent),
@@ -131,11 +130,13 @@ class _ContactsListState extends State<ContactsList> {
                                             EdgeInsets.only(right: 3.w),
                                         trailing: GestureDetector(
                                             onTap: () async {
+                                              ///contacts number list
                                               controller
                                                   .callAndMessagesNumberController
                                                   .text = controller
                                                       .toSetContactsNumberList[
                                                   index];
+                                              ///country number list
                                               controller
                                                       .callCountryNumberController
                                                       .text =
@@ -157,9 +158,7 @@ class _ContactsListState extends State<ContactsList> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             CircleAvatar(
-                                              backgroundColor: Colors.primaries[
-                                                  Random().nextInt(
-                                                      Colors.primaries.length)],
+                                              backgroundColor: AppColors.darkBlue,
                                               child: Text(
                                                 "+${controller.countryNumberList[index]}",
                                                 style: TextStyle(

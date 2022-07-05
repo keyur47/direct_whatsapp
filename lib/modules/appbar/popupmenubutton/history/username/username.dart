@@ -31,12 +31,14 @@ class _UserNameState extends State<UserName> {
   getData() async {
     controller.usernameList = await SharedPrefs.getUserNameList();
     controller.dateTime = await SharedPrefs.getDateTimeList();
+    controller.toSetUsernameList = controller.usernameList.toSet().toList();
 
     setState(() {
       controller.usernameList.join("");
       controller.dateTime.join("");
     });
     print("------------>>>${controller.usernameList}");
+    print("------------>>>${controller.dateTime}");
   }
 
   @override
@@ -63,7 +65,7 @@ class _UserNameState extends State<UserName> {
       body: Stack(
         children: [
           // usernameAppbar(text: "${StringsUtils.userNameHistory}"),
-          controller.usernameList.isEmpty
+          controller.toSetUsernameList.isEmpty
               ? Center(
                   child: Image.asset(
                   "assets/image/no_data.png",
@@ -73,20 +75,20 @@ class _UserNameState extends State<UserName> {
                   padding: EdgeInsets.only(left: 3.w, right: 3.w, top: 1.h),
                   child: ListView.builder(
                     padding: EdgeInsets.zero,
-                    itemCount: controller.usernameList.length,
+                    itemCount: controller.toSetUsernameList.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
                           SwipeActionCell(
                             key: ObjectKey(
-                              controller.usernameList[index],
+                              controller.toSetUsernameList[index],
                             ),
                             trailingActions: <SwipeAction>[
                               SwipeAction(
                                   icon: Icon(Icons.delete, color: Colors.red),
                                   onTap: (CompletionHandler handler) async {
-                                    await controller.usernameList.removeAt(index)[index];
-                                    await SharedPrefs.setUserNameList(controller.usernameList);
+                                    await controller.toSetUsernameList.removeAt(index)[index];
+                                    await SharedPrefs.setUserNameList(controller.toSetUsernameList);
                                     setState(() {});
                                   },
                                   color: Colors.transparent),
@@ -130,7 +132,7 @@ class _UserNameState extends State<UserName> {
                                                             controller
                                                                 .telegramUsernameController
                                                                 .text = controller
-                                                                    .usernameList[
+                                                                    .toSetUsernameList[
                                                                 index];
                                                             Get.to(Telegram());
                                                           },
@@ -151,7 +153,7 @@ class _UserNameState extends State<UserName> {
                                                             controller
                                                                 .instagramUsernameController
                                                                 .text = controller
-                                                                    .usernameList[
+                                                                    .toSetUsernameList[
                                                                 index];
                                                             Get.to(Instagram());
                                                           },
@@ -185,7 +187,7 @@ class _UserNameState extends State<UserName> {
                                             //   ),
                                             // ),
                                             Text(
-                                              "${controller.usernameList[index].substring(0, 1).toUpperCase()}",
+                                              "${controller.toSetUsernameList[index].substring(0, 1).toUpperCase()}",
                                               style: TextStyle(
                                                 fontSize: 24,
                                                 color: Colors.white,
@@ -205,7 +207,7 @@ class _UserNameState extends State<UserName> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "${controller.usernameList[index].toUpperCase()}",
+                                              "${controller.toSetUsernameList[index].toUpperCase()}",
                                               style: TextStyle(
                                                   color: AppColors.black,
                                                   fontFamily: "Customtext",

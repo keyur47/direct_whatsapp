@@ -62,4 +62,5 @@ class CustomIcons {
   static const IconData whatsapp = IconData(0xf232, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData telegram = IconData(0xf2c6, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData sms = IconData(0xf7cd, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData snapchat_ghost = IconData(0xf2ac, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

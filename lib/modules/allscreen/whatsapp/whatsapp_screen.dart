@@ -37,15 +37,17 @@ class _WhatsAppState extends State<WhatsApp> {
                           customAppbar(text: StringsUtils.whatsDirects,icon: Icons.whatsapp,iconColor: AppColor.whiteColor,iconColors: AppColor.whiteColor,gradient: LinearGradient(
                               begin: Alignment.topRight,
                               end: Alignment.bottomRight,colors: [
-                            Color(0xFF5FFC7B),
-                            Color(0xFF28D146),
+                            // Color(0xFF5FFC7B),
+                            // Color(0xFF28D146),
+                            AppColors.darkBlue,
+                            AppColors.darkBlue,
                           ]),
                             top: 0.4.h,
                             bottom: 0.5.h,
                             right: 1.1.w,
                             left: 1.1.w,
                             size: 10.w,
-
+                            directText: StringsUtils.whatsDirects,
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -69,10 +71,8 @@ class _WhatsAppState extends State<WhatsApp> {
                                         controller.countryNumber.value = country.dialCode;
                                         controller.countryName.value = country.name;
                                       });
-                                      print(
-                                          'Country changed to: ${country.dialCode}');
-                                      print(
-                                          'Country changed to name: ${country.name}');
+                                      print('Country changed to: ${country.dialCode}');
+                                      print('Country changed to name: ${country.name}');
                                     },
                                     onTap: () async {
                                       List<String> Number = await SharedPrefs.getNumberList();

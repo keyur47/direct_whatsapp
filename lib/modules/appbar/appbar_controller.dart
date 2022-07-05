@@ -1,9 +1,15 @@
-
+import 'package:direct_whatsapp/utils/string_utils.dart';
 import 'package:get/get.dart';
 
-class AppbarController extends GetxController{
+class AppbarController extends GetxController {
   RxInt pageIndex = 0.obs;
   RxInt popupMenuItemIndex = 1.obs;
-  RxString value = "".obs;
-
+  // RxString value = "".obs;
+  RxList data = [
+    "${StringsUtils.whatsDirects}",
+    "${StringsUtils.whatsDirects}",
+    "${StringsUtils.instagramDirects}",
+    "${StringsUtils.telegramDirects}",
+    "${StringsUtils.smsDirects}",
+  ].obs;
 }

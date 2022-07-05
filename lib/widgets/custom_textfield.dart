@@ -94,8 +94,8 @@ Widget usernameTextField({
               enabled: true,
               contentPadding: EdgeInsets.only(top: 1.7.h),
               border: InputBorder.none,
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: GestureDetector(onTap: onTap, child: Icon(Icons.close)),
+              prefixIcon: Icon(Icons.search,color: AppColors.darkBlue,),
+              suffixIcon: GestureDetector(onTap: onTap, child: Icon(Icons.close,color: AppColors.darkBlue)),
               hintText: hintText,
               hintStyle: TextStyle(fontSize: 16)
           )),

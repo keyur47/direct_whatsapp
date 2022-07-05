@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:direct_whatsapp/modules/allscreen/instagram/instagram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/messages/messages_screen.dart';
+import 'package:direct_whatsapp/modules/allscreen/snapchat/snapchat_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/telegram/telegram_screen.dart';
 import 'package:direct_whatsapp/modules/allscreen/whatsapp/whatsapp_screen.dart';
 import 'package:direct_whatsapp/modules/appbar/appbar_controller.dart';
@@ -25,6 +26,7 @@ class customAppbar extends StatelessWidget {
       required this.left,
       required this.right,
       required this.bottom,
+      required this.directText,
       required this.top,
       required this.size});
 
@@ -38,7 +40,9 @@ class customAppbar extends StatelessWidget {
   double right;
   double left;
   double size;
+  String directText;
 
+  //
   List data = [
     "${StringsUtils.whatsDirects}",
     "${StringsUtils.whatsDirects}",
@@ -46,8 +50,8 @@ class customAppbar extends StatelessWidget {
     "${StringsUtils.telegramDirects}",
     "${StringsUtils.smsDirects}",
   ];
-
   AppbarController controller = Get.put(AppbarController());
+  final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -61,94 +65,94 @@ class customAppbar extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 3,
-                              offset: Offset(4, 6), // Shadow position
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: gradient),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            top: top, bottom: bottom, right: right, left: left),
-                        child: Icon(
-                          icon,
-                          size: size,
-                          color: iconColor,
+                    GestureDetector(
+                      onTap: () {
+                        // _key.currentState?.showButtonMenu();
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 3,
+                                offset: Offset(4, 6), // Shadow position
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: gradient),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              top: top,
+                              bottom: bottom,
+                              right: right,
+                              left: left),
+                          child: Icon(
+                            icon,
+                            size: size,
+                            color: iconColor,
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
                       width: 2.w,
                     ),
-                    Text("${data[controller.pageIndex.value]}",style: TextStyle(fontSize: 18,
-                        fontFamily: "Customtext",
-                        color:   AppColors.darkBlue,),),
-                    PopupMenuButton(
+                    Text(
+                      directText,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Customtext",
+                          color: AppColors.darkBlue,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    PopupMenuButton<int>(
+                      key: _key,
                       elevation: 20,
-                      child: Icon(Icons.keyboard_arrow_down_sharp),
+                      child: Icon(Icons.arrow_drop_down),
                       onSelected: (int value) {
                         controller.popupMenuItemIndex.value = value;
                         if (controller.popupMenuItemIndex.value == 1) {
-                          Get.offAllNamed(WhatsApp.routeName);
+                          Get.toNamed(WhatsApp.routeName);
                         } else if (controller.popupMenuItemIndex.value == 2) {
-                          Get.offAllNamed(Instagram.routeName);
+                          Get.toNamed(Instagram.routeName);
                         } else if (controller.popupMenuItemIndex.value == 3) {
-                          Get.offAllNamed(Telegram.routeName);
+                          Get.toNamed(Telegram.routeName);
                         } else if (controller.popupMenuItemIndex.value == 4) {
-                          Get.offAllNamed(Messages.routeName);
+                          Get.toNamed(Messages.routeName);
+                        } else if (controller.popupMenuItemIndex.value == 5) {
+                          Get.toNamed(Snapchat.routeName);
                         } else {}
-                        // controller.value.value = "${controller.popupMenuItemIndex.value}";
                         controller.pageIndex.value =
                             controller.popupMenuItemIndex.value;
                         print("Value:- $value");
-                        print(
-                            "Value12:- ${controller.popupMenuItemIndex.value}");
-                        print("Value14:- ${controller.value.value}");
+                        print("Value12:- ${controller.popupMenuItemIndex.value}");
                         print("Value19:- ${controller.pageIndex.value}");
                       },
                       itemBuilder: (context) => [
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(
-                              child: Text(
-                            StringsUtils.whatsApp,
-                            style: TextStyle(
-                                fontFamily: "Customtext",
-                                color: AppColors.darkBlue),
-                          )),
+                          child: Center(child: Text(StringsUtils.whatsApp,style: TextStyle(color: AppColors.darkBlue,fontFamily: "Customtext"),)),
                           value: 1,
                         ),
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(
-                              child: Text(StringsUtils.instagram,
-                                  style: TextStyle(
-                                      fontFamily: "Customtext",
-                                      color: AppColors.darkBlue))),
+                          child: Center(child: Text(StringsUtils.instagram,style: TextStyle(color: AppColors.darkBlue,fontFamily: "Customtext"))),
                           value: 2,
                         ),
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(
-                              child: Text(StringsUtils.telegram,
-                                  style: TextStyle(
-                                      fontFamily: "Customtext",
-                                      color: AppColors.darkBlue))),
+                          child: Center(child: Text(StringsUtils.telegram,style: TextStyle(color: AppColors.darkBlue,fontFamily: "Customtext"))),
                           value: 3,
                         ),
                         PopupMenuItem(
                           padding: EdgeInsets.zero,
-                          child: Center(
-                              child: Text(StringsUtils.sms,
-                                  style: TextStyle(
-                                      fontFamily: "Customtext",
-                                      color: AppColors.darkBlue))),
+                          child: Center(child: Text(StringsUtils.sms,style: TextStyle(color: AppColors.darkBlue,fontFamily: "Customtext"))),
                           value: 4,
+                        ),
+                        PopupMenuItem(
+                          padding: EdgeInsets.zero,
+                          child: Center(child: Text(StringsUtils.snapchat,style: TextStyle(color: AppColors.darkBlue,fontFamily: "Customtext"))),
+                          value: 5,
                         ),
                       ],
                     ),
@@ -157,7 +161,7 @@ class customAppbar extends StatelessWidget {
                 PopupMenuButton(
                   onSelected: (int value) {
                     if (value == 1) {
-                      Get.offAllNamed(TabBarApp.routeName);
+                      Get.toNamed(TabBarApp.routeName);
                     } else if (value == 2) {
                       Share();
                     } else if (value == 3) {
@@ -172,7 +176,6 @@ class customAppbar extends StatelessWidget {
                         controller.popupMenuItemIndex.value;
                     print("Value:- $value");
                     print("Value12:- ${controller.popupMenuItemIndex.value}");
-                    print("Value14:- ${controller.value.value}");
                     print("Value19:- ${controller.pageIndex.value}");
                   },
                   itemBuilder: (context) => [
@@ -211,7 +214,7 @@ class customAppbar extends StatelessWidget {
   }
 }
 
-Widget contactsAppbar({required String text , IconData? iconData }) {
+Widget contactsAppbar({required String text, IconData? iconData}) {
   return Container(
     color: AppColors.darkBlue,
     child: Padding(
@@ -223,8 +226,17 @@ Widget contactsAppbar({required String text , IconData? iconData }) {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          GestureDetector( onTap: (){Get.back();},child:  Icon(iconData,color: Colors.white,)),
-          SizedBox(width: 1.w,),
+          GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                iconData,
+                color: Colors.white,
+              )),
+          SizedBox(
+            width: 1.w,
+          ),
           DefaultTextStyle(
             style: const TextStyle(
                 fontSize: 22.0,
@@ -242,7 +254,8 @@ Widget contactsAppbar({required String text , IconData? iconData }) {
     ),
   );
 }
-Widget usernameAppbar({required String text }) {
+
+Widget usernameAppbar({required String text}) {
   return Container(
     color: AppColors.darkBlue,
     child: Row(

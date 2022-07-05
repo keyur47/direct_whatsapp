@@ -85,7 +85,7 @@ class _OpenSmsNumberState extends State<OpenSmsNumber> {
         bottom: 1.1.h,
         boxColor: AppColor.whiteColor,
         textColor: AppColors.black,
-        iconColor: AppColors.darkBlue,
+        iconColor:Color(0xFF28D146),
         sizeIcon: 7.w
     );
   }
